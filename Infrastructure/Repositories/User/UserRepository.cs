@@ -14,7 +14,7 @@ namespace Infrastructure.Repositories.User
         {
             _dbContext = dbContext;
         } 
-        public Task AddAsync(Core.Domain.User.User user)
+        public System.Threading.Tasks.Task AddAsync(Core.Domain.User.User user)
         {
             throw new NotImplementedException();
         }

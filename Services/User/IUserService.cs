@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Services.User
 {
-    interface IUserService
+    public interface IUserService
     {
         Task Login();
         Task Logout();
