@@ -7,5 +7,8 @@ namespace Core.Domain.Project
     public class Project
     {
         public Guid ProjectId { get; set; }
+
+
+        public ICollection<Task.Task> Tasks { get; set; }
     }
 }
