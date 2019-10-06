@@ -7,7 +7,11 @@ namespace Core.Domain.Project.Factories
 {
     public class ProjectFactory:IProjectFactory
     {
-        public Task<Project> CreateAsync()
+        public ProjectFactory()
+        {
+
+        }
+        public Task<Project> CreateAsync(DateTime startDate)
         {
             throw new NotImplementedException();
         }

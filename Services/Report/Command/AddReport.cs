@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Domain.Report
+namespace Services.Report.Command
 {
-    public class Report
+    public class AddReport:ICommand
     {
-        public Guid ReportId { get; set; }
         public string Comment { get; set; }
         public double Time { get; set; }
         public DateTime ReportDate { get; set; }
-        public User.User User { get; set; }
     }
 }

@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Core.Domain.Common
 {
-    public enum ETaskPriority
+    public enum EUserType
     {
-        Normal,
-        Important
-    } 
+        Admin
+    }
 }

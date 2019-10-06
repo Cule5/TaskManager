@@ -6,6 +6,6 @@ namespace Core.Domain.Project.Factories
 {
     public interface IProjectFactory
     {
-        System.Threading.Tasks.Task<Project> CreateAsync();
+        System.Threading.Tasks.Task<Project> CreateAsync(DateTime startDate);
     }
 }

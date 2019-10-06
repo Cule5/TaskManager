@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Core.Domain.Report.Factories
 {
-    interface IReportFactory
+    public interface IReportFactory
     {
         Task<Report> CreateAsync();
     }

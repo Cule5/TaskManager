@@ -13,13 +13,20 @@ namespace Infrastructure.Repositories.User
         public UserRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
-        } 
-        public System.Threading.Tasks.Task AddAsync(Core.Domain.User.User user)
+        }
+
+        public async Task<Core.Domain.User.User> GetAsync(Guid userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Core.Domain.User.User> FindAsync(Core.Domain.User.User user)
+        public async System.Threading.Tasks.Task AddAsync(Core.Domain.User.User user)
+        {
+            await _dbContext.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<Core.Domain.User.User> FindAsync(Core.Domain.User.User user)
         {
             throw new NotImplementedException();
         }

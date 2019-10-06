@@ -15,6 +15,11 @@ namespace Infrastructure.Repositories.Task
             _dbContext = dbContext;
         }
 
+        public async Task<Core.Domain.Task.Task> GetAsync(Guid taskId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.Task.Task task)
         {
             await _dbContext.SaveChangesAsync();

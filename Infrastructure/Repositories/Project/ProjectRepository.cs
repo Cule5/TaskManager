@@ -14,8 +14,15 @@ namespace Infrastructure.Repositories.Project
         {
             _dbContext = dbContext;
         }
-        public async System.Threading.Tasks.Task AddAsync()
+
+        public async Task<Core.Domain.Project.Project> GetAsync(Guid projectId)
         {
+            return await _dbContext.Projects.FindAsync(projectId);
+        }
+
+        public async System.Threading.Tasks.Task AddAsync(Core.Domain.Project.Project project)
+        {
+            await _dbContext.Projects.AddAsync(project);
             await _dbContext.SaveChangesAsync();
         }
 
