@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Domain.User
+namespace Services.User.Command
 {
-    public class User
+    public class RegisterUser:ICommand
     {
-        public Guid UserId { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
