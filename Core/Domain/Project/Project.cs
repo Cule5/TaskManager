@@ -6,9 +6,15 @@ namespace Core.Domain.Project
 {
     public class Project
     {
-        public Guid ProjectId { get; set; }
+        public Project(string projectName,DateTime startDate)
+        {
+            ProjectName = projectName;
+            StartDate = startDate;
+        }
+        public int ProjectId { get; set; }
+        public string ProjectName { get; set; }
         public DateTime StartDate { get; set; }
-        public ICollection<User.User> Users { get; set; }
-        public ICollection<Task.Task> Tasks { get; set; }
+        public virtual ICollection<User.User> Users { get; set; }
+        public virtual ICollection<Task.Task> Tasks { get; set; }
     }
 }

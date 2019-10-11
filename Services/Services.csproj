@@ -9,12 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Project\Command\" />
+    <Folder Include="Project\Handlers\" />
     <Folder Include="Report\Handlers\" />
-    <Folder Include="User\DTO\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,10 @@ namespace Core.Domain.Common
 {
     public enum ETaskPriority
     {
+        Low,
+        BelowNormal,
         Normal,
-        Important
+        AboveNormal,
+        High
     } 
 }

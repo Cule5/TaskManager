@@ -14,7 +14,7 @@ namespace Services.Dispatcher
         {
             _componentContext = componentContext;
         }
-        public async Task DispatchAsync<T>(T command) where T : ICommand
+        public async System.Threading.Tasks.Task DispatchAsync<T>(T command) where T : ICommand
         {
             var handler = _componentContext.Resolve<ICommandHandler<T>>();
             if (handler != null)

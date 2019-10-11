@@ -13,9 +13,9 @@ namespace Services.User.Handlers
         {
             _userService = userService;
         }
-        public Task HandleAsync(LoginUser command)
+        public async System.Threading.Tasks.Task HandleAsync(LoginUser command)
         {
-            throw new NotImplementedException();
+            await _userService.Login(command.Login,command.Password);
         }
     }
 }

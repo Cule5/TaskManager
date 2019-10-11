@@ -8,8 +8,10 @@ namespace Core.Domain.Task
 {
     public class Task
     {
-        public Guid TaskId { get; set; }
+        public int TaskId { get; set; }
         public string Description { get; set; }
         public ETaskPriority TaskPriority { get; set; }
+        public int UserId { get; set; }
+        public virtual User.User User { get; set; }
     }
 }

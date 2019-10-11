@@ -7,6 +7,6 @@ namespace Services
 {
     interface ICommandHandler<in T> where T : ICommand
     {
-        Task HandleAsync(T command);
+        System.Threading.Tasks.Task HandleAsync(T command);
     }
 }

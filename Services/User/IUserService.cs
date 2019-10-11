@@ -7,8 +7,8 @@ namespace Services.User
 {
     public interface IUserService
     {
-        Task Login();
-        Task Logout();
-        Task Register();
+        System.Threading.Tasks.Task Login(string login,string password);
+        System.Threading.Tasks.Task Logout();
+        System.Threading.Tasks.Task Register();
     }
 }

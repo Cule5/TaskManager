@@ -13,9 +13,9 @@ namespace Services.User.Handlers
         {
             _userService = userService;
         }
-        public async Task HandleAsync(RegisterUser command)
+        public async System.Threading.Tasks.Task HandleAsync(RegisterUser command)
         {
-            throw new NotImplementedException();
+            await _userService.Register();
         }
     }
 }

@@ -7,6 +7,6 @@ namespace Services.Dispatcher
 {
     public interface ICommandDispatcher
     {
-        Task DispatchAsync<T>(T command) where T : ICommand;
+        System.Threading.Tasks.Task DispatchAsync<T>(T command) where T : ICommand;
     }
 }
