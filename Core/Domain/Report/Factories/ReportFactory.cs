@@ -7,9 +7,9 @@ namespace Core.Domain.Report.Factories
 {
     public class ReportFactory:IReportFactory
     {
-        public Task<Report> CreateAsync()
+        public Task<Report> CreateAsync(string comment, double time, DateTime reportDate)
         {
-            throw new NotImplementedException();
+            return System.Threading.Tasks.Task.Factory.StartNew((() => new Report(comment,time,reportDate)));
         }
     }
 }

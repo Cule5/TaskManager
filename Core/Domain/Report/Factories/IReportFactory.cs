@@ -7,6 +7,6 @@ namespace Core.Domain.Report.Factories
 {
     public interface IReportFactory
     {
-        Task<Report> CreateAsync();
+        Task<Report> CreateAsync(string comment,double time,DateTime reportDate);
     }
 }

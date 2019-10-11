@@ -17,7 +17,7 @@ namespace Core.Domain.User
         public string Email { get; set; }
         public EUserType UserType { get; set; }
         public virtual ICollection<Task.Task> Tasks { get; set; }
-
+        public virtual ICollection<Report.Report> Reports { get; set; }
         private bool CheckEmail(string email)
         {
             var tmpEmail = email.ToLower();

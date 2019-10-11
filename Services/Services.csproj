@@ -9,8 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Project\Command\" />
-    <Folder Include="Project\Handlers\" />
+    <Folder Include="Project\Dtos\" />
     <Folder Include="Report\Handlers\" />
   </ItemGroup>
 

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.User.DTO
+namespace Services.User.Dtos
 {
-    class LoginUserDto
+    public class RegisterUserDto
     {
         public string Login { get; set; }
         public string Password { get; set; }
