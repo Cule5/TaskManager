@@ -5,14 +5,14 @@ using Services.Project.Command;
 
 namespace Services.Project.Handlers
 {
-    public class AddProjectHandler:ICommandHandler<AddProject>
+    public class CreateProjectHandler:ICommandHandler<CreateProject>
     {
         private readonly IProjectService _projectService = null;
-        public AddProjectHandler(IProjectService projectService)
+        public CreateProjectHandler(IProjectService projectService)
         {
             _projectService = projectService;
         }
-        public async System.Threading.Tasks.Task HandleAsync(AddProject command)
+        public async System.Threading.Tasks.Task HandleAsync(CreateProject command)
         {
             await _projectService.AddProjectAsync();
         }

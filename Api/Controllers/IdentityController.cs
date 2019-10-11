@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher;
 using Services.User.Command;
@@ -10,25 +11,25 @@ using Services.User.Command;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
-    public class UserController : Controller
+    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    public class IdentityController : ApiController
     {
         private readonly ICommandDispatcher _commandDispatcher = null;
-        public UserController(ICommandDispatcher commandDispatcher)
+        public IdentityController(ICommandDispatcher commandDispatcher)
         {
             _commandDispatcher = commandDispatcher;
         }
-        [HttpPost]
-        [Route("Register")]
-        public async Task<IActionResult> RegisterUser(RegisterUser registerUser)
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.Route("Register")]
+        public async Task<IHttpActionResult> RegisterUser(RegisterUser registerUser)
         {
             await _commandDispatcher.DispatchAsync(registerUser);
             return Ok();
         }
 
-        [HttpPost]
-        [Route("Login")]
-        public async Task<IActionResult> LoginUser(LoginUser loginUser)
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.Route("Login")]
+        public async Task<IHttpActionResult> LoginUser(LoginUser loginUser)
         {
             await _commandDispatcher.DispatchAsync(loginUser);
             return Ok();

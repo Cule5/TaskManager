@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Project.Command
+namespace Services.Dispatcher
 {
-    public class AddProject:ICommand
+    public interface IQueryDispatcher
     {
     }
 }

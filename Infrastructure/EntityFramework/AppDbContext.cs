@@ -24,7 +24,18 @@ namespace Infrastructure.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Project>()
+                .Property(p => p.ProjectId)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Report>()
+                .Property(r => r.ReportId)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Task>()
+                .Property(t => t.TaskId)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<User>()
+                .Property(u => u.UserId)
+                .ValueGeneratedOnAdd();
         }
     }
 }
