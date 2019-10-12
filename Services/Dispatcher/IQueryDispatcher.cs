@@ -6,5 +6,6 @@ namespace Services.Dispatcher
 {
     public interface IQueryDispatcher
     {
+        System.Threading.Tasks.Task DispatchAsync();
     }
 }

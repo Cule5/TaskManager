@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Services
+namespace Services.Interfaces
 {
-    interface ICommandHandler<in T> where T : ICommand
+    public interface ICommandHandler<in T> where T : ICommand
     {
         System.Threading.Tasks.Task HandleAsync(T command);
     }
