@@ -15,9 +15,12 @@ namespace Services.Dispatcher
             _componentContext = componentContext;
         }
        
-        public async System.Threading.Tasks.Task DispatchAsync() 
+        public async Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query)
         {
-            
+            var handlerType = typeof(IQueryHandler<,>)
+                .MakeGenericType(query.GetType(), typeof(TResult));
+            dynamic handler = _componentContext.Resolve(handlerType);
+            return await handler.HandleAsync();
         }
     }
 }
