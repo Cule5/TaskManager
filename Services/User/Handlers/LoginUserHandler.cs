@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Services.Interfaces;
+using Services.Common.Command;
 using Services.User.Command;
 
 namespace Services.User.Handlers

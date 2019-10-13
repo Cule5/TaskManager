@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Services.Interfaces
+﻿namespace Services.Common.Query
 {
     public interface IQueryHandler<in TQuery, out TResult> where TQuery : IQuery<TResult>
     {

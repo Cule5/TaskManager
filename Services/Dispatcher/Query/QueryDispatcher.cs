@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Autofac;
-using Services.Interfaces;
+using Services.Common.Query;
 
-namespace Services.Dispatcher
+namespace Services.Dispatcher.Query
 {
     public class QueryDispatcher:IQueryDispatcher
     {

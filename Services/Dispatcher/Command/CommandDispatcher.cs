@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
-using Services.Interfaces;
+﻿using Autofac;
+using Services.Common.Command;
 
-namespace Services.Dispatcher
+namespace Services.Dispatcher.Command
 {
     public class CommandDispatcher:ICommandDispatcher
     {

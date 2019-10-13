@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Services.Interfaces;
+using Services.Common.Command;
 
 namespace Services.User.Command
 {

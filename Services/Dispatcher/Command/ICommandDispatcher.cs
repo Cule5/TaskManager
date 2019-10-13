@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Services.Interfaces;
+using Services.Common.Command;
 
-namespace Services.Dispatcher
+namespace Services.Dispatcher.Command
 {
     public interface ICommandDispatcher
     {

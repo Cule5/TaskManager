@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Services.Interfaces;
+﻿using Services.Common.Query;
 
-namespace Services.Dispatcher
+namespace Services.Dispatcher.Query
 {
     public interface IQueryDispatcher
     {
