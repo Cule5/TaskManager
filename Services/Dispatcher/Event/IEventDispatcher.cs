@@ -4,6 +4,6 @@ namespace Services.Dispatcher.Event
 {
     public interface IEventDispatcher
     {
-        System.Threading.Tasks.Task DispatchAsync<TEvent>(TEvent @event) where TEvent:IEvent;
+        System.Threading.Tasks.Task DispatchAsync<T>(params T[] events) where T : IEvent;
     }
 }

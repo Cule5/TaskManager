@@ -13,9 +13,9 @@ namespace Core.Domain.Project.Factories
         {
             _projectRepository = projectRepository;
         }
-        public Task<Project> CreateAsync(string projectName,DateTime startDate)
+        public Task<Project> CreateAsync(string projectName,string description,DateTime startDate)
         {
-            return System.Threading.Tasks.Task.Factory.StartNew(() => new Project(projectName,startDate));
+            return System.Threading.Tasks.Task.Factory.StartNew(() => new Project(projectName,description,startDate));
         }
     }
 }

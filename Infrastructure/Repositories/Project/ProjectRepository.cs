@@ -15,7 +15,7 @@ namespace Infrastructure.Repositories.Project
             _dbContext = dbContext;
         }
 
-        public async Task<Core.Domain.Project.Project> GetAsync(Guid projectId)
+        public async Task<Core.Domain.Project.Project> GetAsync(int projectId)
         {
             return await _dbContext.Projects.FindAsync(projectId);
         }
