@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Infrastructure.Authentication
 {
-    public class JwtHandler:IJwtHandler
+    public interface IJwtProvider
     {
-        
+        JsonWebToken CreateToken(int userId);
     }
 }

@@ -12,9 +12,10 @@ namespace Core.Domain.User.Factories
         {
             _userRepository = userRepository;
         }
-        public System.Threading.Tasks.Task CreateAsync(string login,string password,string email)
+        public async System.Threading.Tasks.Task<User> CreateAsync(string login,string password)
         {
-            throw new NotImplementedException();
+            var dbUser=await _userRepository.FindAsync(login, password);
+            return dbUser ?? new User(login,password);
         }
     }
 }

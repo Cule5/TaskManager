@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Authentication;
+using Services.User.Dtos;
 
 namespace Services.User
 {
     public class UserService:IUserService
     {
-        private readonly IJwtHandler _jwtHandler = null;
-        public UserService(IJwtHandler jwtHandler)
+        private readonly IJwtProvider _jwtProvider = null;
+        public UserService(IJwtProvider jwtProvider)
         {
-            _jwtHandler = jwtHandler;
+            _jwtProvider = jwtProvider;
         }
-        public System.Threading.Tasks.Task Login(string login,string password)
+        public async System.Threading.Tasks.Task<JsonWebToken> Login(string login,string password)
         {
-            throw new NotImplementedException();
+            return null;
+
         }
 
         public System.Threading.Tasks.Task Logout()
@@ -23,7 +26,7 @@ namespace Services.User
             throw new NotImplementedException();
         }
 
-        public System.Threading.Tasks.Task Register()
+        public System.Threading.Tasks.Task Register(RegisterUserDto registerUserDto)
         {
             throw new NotImplementedException();
         }

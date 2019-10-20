@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Services.Common.Command;
 using Services.User.Command;
+using Services.User.Dtos;
 
 namespace Services.User.Handlers
 {
@@ -16,7 +17,12 @@ namespace Services.User.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(RegisterUser command)
         {
-            await _userService.Register();
+            var registerUserDto=new RegisterUserDto()
+            {
+                Login = command.Login,
+                Password = command.Password
+            };
+            await _userService.Register(registerUserDto);
         }
     }
 }

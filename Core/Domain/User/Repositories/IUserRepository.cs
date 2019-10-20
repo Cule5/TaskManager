@@ -7,8 +7,8 @@ namespace Core.Domain.User.Repositories
 {
     public interface IUserRepository
     {
-        Task<User> GetAsync(Guid userId);
+        Task<User> GetAsync(int userId);
         System.Threading.Tasks.Task AddAsync(User user);
-        Task<User> FindAsync(User user);
+        Task<User> FindAsync(string login,string password);
     }
 }

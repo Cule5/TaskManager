@@ -29,7 +29,6 @@ namespace Services.Dispatcher.Event
                 if (handler == null)
                     return;
 
-                
                 var method = handler.GetType()
                     .GetRuntimeMethods()
                     .First(x => x.Name.Equals("HandleAsync"));

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Core.Domain.Exceptions
 {
-    public class EmailException:Exception
+    public class UserException:Exception
     {
-        public EmailException(string message) : base(message)
+        public UserException(string message):base(message)
         {
 
         }

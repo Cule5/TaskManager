@@ -6,6 +6,6 @@ namespace Core.Domain.User.Factories
 {
     public interface IUserFactory
     {
-        System.Threading.Tasks.Task CreateAsync(string login,string password,string email);
+        System.Threading.Tasks.Task<User> CreateAsync(string login,string password);
     }
 }

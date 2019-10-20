@@ -11,7 +11,6 @@ namespace Services.Dispatcher.Query
         {
             _componentContext = componentContext;
         }
-       
         public async Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query)
         {
             var handlerType = typeof(IQueryHandler<,>)

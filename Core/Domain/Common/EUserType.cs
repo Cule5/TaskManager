@@ -6,6 +6,8 @@ namespace Core.Domain.Common
 {
     public enum EUserType
     {
-        Admin
+        CompanyAdmin,
+        Worker,
+        PrivateUser
     }
 }

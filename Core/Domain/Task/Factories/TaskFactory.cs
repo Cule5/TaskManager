@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Domain.Common;
 
 namespace Core.Domain.Task.Factories
 {
     public class TaskFactory:ITaskFactory
     {
-        public async Task<Task> CreateAsync()
+        public Task<Task> CreateAsync(string description, ETaskPriority taskPriority, DateTime startDate, DateTime endDate)
         {
-            throw new NotImplementedException();
+            return System.Threading.Tasks.Task.Factory.StartNew(()=>new Task(description,taskPriority,startDate,endDate));
         }
     }
 }

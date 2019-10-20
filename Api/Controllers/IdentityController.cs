@@ -29,7 +29,7 @@ namespace Api.Controllers
 
         [Microsoft.AspNetCore.Mvc.HttpPost]
         [Microsoft.AspNetCore.Mvc.Route("Login")]
-        public async Task<IHttpActionResult> LoginUser(LoginUser loginUser)
+        public async Task<IHttpActionResult> LoginUser([Microsoft.AspNetCore.Mvc.FromBody]LoginUser loginUser)
         {
             await _commandDispatcher.DispatchAsync(loginUser);
             return Ok();

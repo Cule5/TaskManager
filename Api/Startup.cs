@@ -32,7 +32,7 @@ namespace Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .AsImplementedInterfaces();
