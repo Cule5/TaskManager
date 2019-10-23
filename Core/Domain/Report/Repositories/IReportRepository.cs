@@ -8,7 +8,7 @@ namespace Core.Domain.Report.Repositories
 {
     public interface IReportRepository
     {
-        Task<Report> GetAsync(Guid id);
+        Task<Report> GetAsync(int reportId);
         System.Threading.Tasks.Task AddAsync(Report report);
         Task<Report> FindAsync(Report report);
     }

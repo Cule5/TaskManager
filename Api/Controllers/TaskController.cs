@@ -5,36 +5,38 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
-using Services.User.Command;
+using Services.Dispatcher.Query;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
-    public class IdentityController : ApiController
+    public class TaskController : ApiController
     {
         private readonly ICommandDispatcher _commandDispatcher = null;
-        public IdentityController(ICommandDispatcher commandDispatcher)
+        private readonly IQueryDispatcher _queryDispatcher = null;
+        public TaskController(ICommandDispatcher commandDispatcher,IQueryDispatcher queryDispatcher)
         {
             _commandDispatcher = commandDispatcher;
+            _queryDispatcher = queryDispatcher;
         }
-        [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.Route("Register")]
-        public async Task<IHttpActionResult> RegisterUser(RegisterUser registerUser)
+        
+        [Microsoft.AspNetCore.Mvc.HttpGet]
+        [Microsoft.AspNetCore.Mvc.Route("")]
+        public async Task<IHttpActionResult> GetAvailablesUsers()
         {
-            await _commandDispatcher.DispatchAsync(registerUser);
             return Ok();
         }
 
         [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.Route("Login")]
-        public async Task<IHttpActionResult> LoginUser([Microsoft.AspNetCore.Mvc.FromBody]LoginUser loginUser)
+        [Microsoft.AspNetCore.Mvc.Route("CreateTask")]
+        public async Task<IHttpActionResult> CreateTask()
         {
-            await _commandDispatcher.DispatchAsync(loginUser);
             return Ok();
         }
 
-       
+
     }
 }

@@ -6,7 +6,7 @@ namespace Services.Task
 {
     public interface ITaskService
     {
-        System.Threading.Tasks.Task AddTaskAsync();
+        System.Threading.Tasks.Task CreateTaskAsync();
         System.Threading.Tasks.Task DeleteTaskAsync();
     }
 }

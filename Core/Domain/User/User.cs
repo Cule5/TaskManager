@@ -28,9 +28,9 @@ namespace Core.Domain.User
         public virtual Group.Group Group { get; set; }
         public virtual ICollection<Task.Task> Tasks { get; set; }
         public virtual ICollection<Report.Report> Reports { get; set; }
-        public override bool Equals(object other)
+        public override bool Equals(object obj)
         {
-            return Equals(other as User);
+            return Equals(obj as User);
         }
 
         public virtual bool Equals(User user)

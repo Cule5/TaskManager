@@ -14,14 +14,15 @@ namespace Infrastructure.Repositories.Report
         {
             _dbContext = dbContext;
         }
-        public async Task<Core.Domain.Report.Report> GetAsync(Guid id)
+        public async Task<Core.Domain.Report.Report> GetAsync(int reportId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Reports.FindAsync(reportId);
         }
 
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.Report.Report report)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(report);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Core.Domain.Report.Report> FindAsync(Core.Domain.Report.Report report)

@@ -22,5 +22,9 @@ namespace Core.Domain.Task
         public DateTime EndDate { get; set; }
         public int UserId { get; set; }
         public virtual User.User User { get; set; }
+        public override int GetHashCode()
+        {
+            return TaskId;
+        }
     }
 }

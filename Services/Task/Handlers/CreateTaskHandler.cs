@@ -6,16 +6,16 @@ using Services.Task.Command;
 
 namespace Services.Task.Handlers
 {
-    public class AddTaskHandler:ICommandHandler<AddTask>
+    public class CreateTaskHandler:ICommandHandler<CreateTask>
     {
         private readonly ITaskService _taskService = null;
-        public AddTaskHandler(ITaskService taskService)
+        public CreateTaskHandler(ITaskService taskService)
         {
             _taskService = taskService;
         }
-        public System.Threading.Tasks.Task HandleAsync(AddTask command)
+        public async System.Threading.Tasks.Task HandleAsync(CreateTask command)
         {
-            throw new NotImplementedException();
+            await _taskService.CreateTaskAsync();
         }
     }
 }

@@ -18,5 +18,21 @@ namespace Core.Domain.Project
         public DateTime StartDate { get; set; }
         public virtual ICollection<User.User> Users { get; set; }
         public virtual ICollection<Task.Task> Tasks { get; set; }
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj as Project);
+        }
+
+        public virtual bool Equals(Project project)
+        {
+            if (project == null)
+                return false;
+            return project.ProjectName.Equals(ProjectName);
+        }
+
+        public override int GetHashCode()
+        {
+            return ProjectId;
+        }
     }
 }

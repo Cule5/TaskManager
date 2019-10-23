@@ -8,6 +8,6 @@ namespace Core.Domain.Common
     {
         CompanyAdmin,
         Worker,
-        PrivateUser
+        
     }
 }

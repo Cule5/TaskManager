@@ -22,7 +22,7 @@ namespace Services.User.Handlers
                 Login = command.Login,
                 Password = command.Password
             };
-            await _userService.Register(registerUserDto);
+            await _userService.RegisterAsync(registerUserDto);
         }
     }
 }

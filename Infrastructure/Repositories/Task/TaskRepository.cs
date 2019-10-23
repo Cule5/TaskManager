@@ -15,13 +15,14 @@ namespace Infrastructure.Repositories.Task
             _dbContext = dbContext;
         }
 
-        public async Task<Core.Domain.Task.Task> GetAsync(Guid taskId)
+        public async Task<Core.Domain.Task.Task> GetAsync(int taskId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Tasks.FindAsync(taskId);
         }
 
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.Task.Task task)
         {
+            await _dbContext.Tasks.AddAsync(task);
             await _dbContext.SaveChangesAsync();
         }
 

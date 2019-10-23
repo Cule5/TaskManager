@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Report\Handlers\" />
+    <Folder Include="Task\Dtos\" />
   </ItemGroup>
 
   <ItemGroup>

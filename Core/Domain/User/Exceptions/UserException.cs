@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Domain.Exceptions
+namespace Core.Domain.User.Exceptions
 {
     public class UserException:Exception
     {

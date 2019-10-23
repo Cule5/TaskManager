@@ -7,6 +7,6 @@ namespace Core.Domain.Group.Factories
 {
     public interface IGroupFactory
     {
-        Task<Group> CreateAsync();
+        Task<Group> CreateAsync(string groupName);
     }
 }

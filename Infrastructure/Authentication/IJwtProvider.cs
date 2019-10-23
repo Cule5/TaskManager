@@ -6,6 +6,7 @@ namespace Infrastructure.Authentication
 {
     public interface IJwtProvider
     {
+
         JsonWebToken CreateToken(int userId);
     }
 }
