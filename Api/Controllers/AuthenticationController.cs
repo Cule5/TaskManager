@@ -38,7 +38,7 @@ namespace Api.Controllers
         }
         
         [Microsoft.AspNetCore.Mvc.HttpPut]
-        [Microsoft.AspNetCore.Mvc.Route("Logout")]
+        [Microsoft.AspNetCore.Mvc.Route("LogoutAsync")]
         public async Task<IHttpActionResult> LogoutUser()
         {
             return Ok();

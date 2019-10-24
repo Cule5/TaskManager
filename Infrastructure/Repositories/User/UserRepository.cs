@@ -24,18 +24,18 @@ namespace Infrastructure.Repositories.User
 
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.User.User user)
         {
-            var dbUser=await FindAsync(user.Login,user.Password);
-            if(dbUser!=null)
-                throw new UserException("Bad login or password");
             await _dbContext.AddAsync(user);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Core.Domain.User.User> FindAsync(string login, string password)
+        public async Task<Core.Domain.User.User> FindAsync(string name, string lastName)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync((u)=>u.Equals(new Core.Domain.User.User(login,password)));
+            return await _dbContext.Users.FirstOrDefaultAsync((u)=>u.Equals(new Core.Domain.User.User(name,lastName)));
         }
 
-        
+        public async Task<IEnumerable<Core.Domain.User.User>> GetAllUsersAsync()
+        {
+            return await _dbContext.Users.ToListAsync();
+        }
     }
 }

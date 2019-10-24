@@ -5,7 +5,7 @@ using Services.Common.Command;
 
 namespace Services.Report.Command
 {
-    public class AddReport:ICommand
+    public class CreateReport:ICommand
     {
         public string Comment { get; set; }
         public double Time { get; set; }

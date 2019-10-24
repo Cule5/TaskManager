@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Core.Domain.Account.Repositories;
+using Core.Domain.Common;
+using Core.Domain.Exceptions;
 using Core.Domain.User.Exceptions;
 using Core.Domain.User.Repositories;
 
@@ -9,16 +13,19 @@ namespace Core.Domain.User.Factories
     public class UserFactory:IUserFactory
     {
         private readonly IUserRepository _userRepository = null;
-        public UserFactory(IUserRepository userRepository)
+        private readonly IAccountRepository _accountRepository = null;
+        public UserFactory(IUserRepository userRepository,IAccountRepository accountRepository)
         {
             _userRepository = userRepository;
+            _accountRepository = accountRepository;
         }
-        public async System.Threading.Tasks.Task<User> CreateAsync(string login,string password)
+
+        public async Task<User> CreateAsync(string name, string lastName,EUserType userType, Account.Account account)
         {
-            var dbUser=await _userRepository.FindAsync(login, password);
-            if(dbUser!=null)
-                throw new UserException("User with given login or password already exist");
-            return new User(login,password);
+            var dbAccount=await _accountRepository.FindAsync(account.Login);
+            if(dbAccount!=null)
+                throw new LoginException("User with given login already exists");
+            return new User(name,lastName,userType,account);
         }
     }
 }

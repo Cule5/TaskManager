@@ -10,5 +10,10 @@ namespace Services.Group
         {
             throw new NotImplementedException();
         }
+
+        public System.Threading.Tasks.Task DeleteGroup()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

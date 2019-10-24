@@ -12,8 +12,7 @@ namespace Core.Domain.Group
         }
         public int GroupId { get; set; }
         public string GroupName { get; set; }
-        public int UserId { get; set; }
-        public virtual User.User User { get; set; }
+        public virtual ICollection<User.User> Users { get; set; }
         public override bool Equals(object obj)
         {
             return base.Equals(obj as Group);

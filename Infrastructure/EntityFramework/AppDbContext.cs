@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Domain.Account;
 using Core.Domain.Conversation;
 using Core.Domain.Group;
 using Core.Domain.Project;
@@ -14,6 +15,7 @@ namespace Infrastructure.EntityFramework
 {
     public class AppDbContext:DbContext
     {
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Conversation> Conversations { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
@@ -28,6 +30,9 @@ namespace Infrastructure.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Account>()
+                .Property(a => a.AccountId)
+                .ValueGeneratedOnAdd();
             modelBuilder.Entity<Conversation>()
                 .Property(c=>c.ConversationId)
                 .ValueGeneratedOnAdd();

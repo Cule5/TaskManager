@@ -9,20 +9,20 @@ namespace Core.Domain.User
 {
     public class User
     {
-        public User(string login, string password)
+        public User(string name,string lastName)
         {
-            Login = login;
-            Password = password;
+            Name = name;
+            LastName = lastName;
         }
-        public User(string login,string password,EUserType userType)
+        public User(string name,string lastName,EUserType userType,Account.Account account)
         {
-            Login = login;
-            Password = password;
+            Name = name;
+            LastName = lastName;
             UserType = userType;
         }
         public int UserId { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
         public EUserType UserType { get; set; }
         public int GroupId { get; set; }
         public virtual Group.Group Group { get; set; }
@@ -37,9 +37,9 @@ namespace Core.Domain.User
         {
             if (user == null)
                 return false;
-            if (object.ReferenceEquals(this, user)) { return true; }
-
-            return Login == user.Login && Password == user.Password;
+            if (object.ReferenceEquals(this, user))
+                return true;
+            return Name == user.Name && LastName == user.LastName;
         }
 
         public override int GetHashCode()
