@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Principal;
 using System.Text;
 using Core.Domain.Common;
+using Core.Domain.Report;
 
 namespace Core.Domain.Task
 {
@@ -23,6 +24,7 @@ namespace Core.Domain.Task
         public DateTime EndDate { get; set; }
         public int UserId { get; set; }
         public virtual User.User User { get; set; }
+        public virtual ICollection<WorkItem> WorkItems { get; set; }
         public override int GetHashCode()
         {
             return TaskId;

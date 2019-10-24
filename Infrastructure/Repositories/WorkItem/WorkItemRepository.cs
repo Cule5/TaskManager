@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Core.Domain.Report.Repositories;
 using Infrastructure.EntityFramework;
 
-namespace Infrastructure.Repositories.Report
+namespace Infrastructure.Repositories.WorkItem
 {
-    public class ReportRepository:IReportRepository
+    public class WorkItemRepository:IWorkItemRepository
     {
         private readonly AppDbContext _dbContext = null;
-        public ReportRepository(AppDbContext dbContext)
+        public WorkItemRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }

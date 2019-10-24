@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Domain.Report.Repositories
 {
-    public interface IReportRepository
+    public interface IWorkItemRepository
     {
         Task<WorkItem> GetAsync(int reportId);
         System.Threading.Tasks.Task AddAsync(WorkItem workItem);

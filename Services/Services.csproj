@@ -9,8 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Conversation\Command\" />
-    <Folder Include="Conversation\Handlers\" />
     <Folder Include="Task\Dtos\" />
   </ItemGroup>
 

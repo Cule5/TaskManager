@@ -6,5 +6,6 @@ namespace Services.Conversation
 {
     public interface IConversationService
     {
+        System.Threading.Tasks.Task SendMessageAsync();
     }
 }

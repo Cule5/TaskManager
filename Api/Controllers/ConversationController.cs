@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Services.Conversation.Command;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
 
@@ -10,7 +11,7 @@ using Services.Dispatcher.Query;
 
 namespace Api.Controllers
 {
-    [Authorize]
+    [Microsoft.AspNetCore.Authorization.Authorize]
     [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
     public class MessagingController : ApiController
     {
@@ -20,6 +21,13 @@ namespace Api.Controllers
         {
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
+        }
+        [HttpPost]
+        [Route("SendMessage")]
+        public async Task<IHttpActionResult> SendMessageAsync([FromBody]SendMessage command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
         }
     }
 }
