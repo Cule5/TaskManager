@@ -26,8 +26,10 @@ namespace Core.Domain.User
         public EUserType UserType { get; set; }
         public int GroupId { get; set; }
         public virtual Group.Group Group { get; set; }
+        public int AccountId { get; set; }
+        public Account.Account Account { get; set; }
         public virtual ICollection<Task.Task> Tasks { get; set; }
-        public virtual ICollection<Report.Report> Reports { get; set; }
+        
         public override bool Equals(object obj)
         {
             return Equals(obj as User);

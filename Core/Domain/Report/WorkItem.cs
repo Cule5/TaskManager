@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Core.Domain.Report
 {
-    public class Report
+    public class WorkItem
     {
-        public Report(string comment,double time,DateTime reportDate)
+        public WorkItem(string comment,double time,DateTime reportDate)
         {
             Comment = comment;
             Time = time;
@@ -16,20 +16,20 @@ namespace Core.Domain.Report
         public string Comment { get; set; }
         public double Time { get; set; }
         public DateTime ReportDate { get; set; }
-        public int UserId { get; set; }
-        public virtual User.User User { get; set; }
+        public int TaskId { get; set; }
+        public virtual Task.Task Task { get; set; }
         public override bool Equals(object obj)
         {
-            return base.Equals(obj as Report);
+            return base.Equals(obj as WorkItem);
         }
-        public virtual bool Equals(Report report)
+        public virtual bool Equals(WorkItem workItem)
         {
-            if (report == null)
+            if (workItem == null)
                 return false;
-            if (object.ReferenceEquals(this, report))
+            if (object.ReferenceEquals(this, workItem))
                 return true;
 
-            return Comment == report.Comment && Math.Abs(Time - report.Time) < 0.001&&ReportDate.Equals(report.ReportDate)&&UserId==report.UserId;
+            return true;
         }
 
         public override int GetHashCode()

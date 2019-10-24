@@ -7,5 +7,6 @@ namespace Services.Project.Command
 {
     public class CreateProject:ICommand
     {
+        public string ProjectName { get; set; }
     }
 }

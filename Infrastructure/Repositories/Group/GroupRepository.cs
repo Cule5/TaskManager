@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Domain.Group.Exceptions;
+using Core.Domain.Exceptions;
 using Core.Domain.Group.Repositories;
 using Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories.Group
         {
             var dbGroup=await FindAsync(group.GroupName);
             if(dbGroup!=null)
-                throw new GroupException("Group like this already exists");
+                throw new GroupNameException("Group like this already exists");
             await _dbContext.Groups.AddAsync(group);
             await _dbContext.SaveChangesAsync();
         }

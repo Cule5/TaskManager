@@ -26,9 +26,5 @@ namespace Infrastructure.Repositories.Task
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Core.Domain.Task.Task> FindAsync(Core.Domain.Task.Task task)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

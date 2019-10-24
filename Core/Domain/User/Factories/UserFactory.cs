@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Core.Domain.Account.Repositories;
 using Core.Domain.Common;
 using Core.Domain.Exceptions;
-using Core.Domain.User.Exceptions;
 using Core.Domain.User.Repositories;
 
 namespace Core.Domain.User.Factories

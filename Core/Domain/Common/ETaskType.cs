@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Core.Domain.Common
 {
-    public enum EMessageStatus
+    public enum ETaskType
     {
-        Sent,
-        Delivered
+        Testing
     }
 }

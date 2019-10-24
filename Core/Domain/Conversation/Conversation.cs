@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Domain.Common;
 
 namespace Core.Domain.Conversation
 {
@@ -12,5 +13,6 @@ namespace Core.Domain.Conversation
         public User.User Sender { get; set; }
         public int ReceiverId { get; set; }
         public User.User Receiver { get; set; }
+        public EMessageStatus MessageStatus { get; set; }
     }
 }

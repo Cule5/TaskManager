@@ -19,8 +19,11 @@ namespace Services.User.Handlers
         {
             var registerUserDto=new RegisterUserDto()
             {
+                Name = command.Name,
+                LastName = command.LastName,
                 Login = command.Login,
-                Password = command.Password
+                Password = command.Password,
+                UserType=command.UserType
             };
             await _userService.RegisterAsync(registerUserDto);
         }

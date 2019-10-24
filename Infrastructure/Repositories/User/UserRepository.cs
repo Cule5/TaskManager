@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Domain.User.Exceptions;
 using Core.Domain.User.Repositories;
 using Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;

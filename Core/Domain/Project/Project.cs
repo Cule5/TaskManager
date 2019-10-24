@@ -16,7 +16,7 @@ namespace Core.Domain.Project
         public string ProjectName { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
-        public virtual ICollection<User.User> Users { get; set; }
+        public virtual ICollection<GroupProject.GroupProject> GroupProjects { get; set; }
         public virtual ICollection<Task.Task> Tasks { get; set; }
         public override bool Equals(object obj)
         {

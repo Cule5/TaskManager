@@ -7,9 +7,9 @@ namespace Core.Domain.Report.Factories
 {
     public class ReportFactory:IReportFactory
     {
-        public Task<Report> CreateAsync(string comment, double time, DateTime reportDate)
+        public Task<WorkItem> CreateAsync(string comment, double time, DateTime reportDate)
         {
-            return System.Threading.Tasks.Task.Factory.StartNew((() => new Report(comment,time,reportDate)));
+            return System.Threading.Tasks.Task.Factory.StartNew((() => new WorkItem(comment,time,reportDate)));
         }
     }
 }

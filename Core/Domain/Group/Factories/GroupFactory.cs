@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Domain.Group.Exceptions;
+using Core.Domain.Exceptions;
 using Core.Domain.Group.Repositories;
 
 namespace Core.Domain.Group.Factories
@@ -18,7 +18,7 @@ namespace Core.Domain.Group.Factories
         {
             var dbGroup=await _groupRepository.FindAsync(groupName);
             if(dbGroup!=null)
-                throw new GroupException("Group with name like this already exists");
+                throw new GroupNameException("Group with name like this already exists");
             return new Group(groupName);
         }
     }

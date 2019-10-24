@@ -8,8 +8,8 @@ namespace Core.Domain.Report.Repositories
 {
     public interface IReportRepository
     {
-        Task<Report> GetAsync(int reportId);
-        System.Threading.Tasks.Task AddAsync(Report report);
-        Task<Report> FindAsync(Report report);
+        Task<WorkItem> GetAsync(int reportId);
+        System.Threading.Tasks.Task AddAsync(WorkItem workItem);
+        Task<WorkItem> FindAsync(WorkItem workItem);
     }
 }

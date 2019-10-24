@@ -31,11 +31,11 @@ namespace Services.User
         }
         public async System.Threading.Tasks.Task<JsonWebToken> Login(string login,string password)
         {
-            var dbUser = await _userRepository.FindAsync(login,password);
+            var dbUser = await _accountRepository.FindAsync(login);
             if(dbUser==null)
                 throw new LoginPasswordException("Bad login or password");
 
-            _jwtProvider.CreateToken(dbUser.UserId);
+            //_jwtProvider.CreateToken(dbUser.UserId);
 
             return null;
 

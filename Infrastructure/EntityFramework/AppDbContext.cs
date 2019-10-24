@@ -4,6 +4,7 @@ using System.Text;
 using Core.Domain.Account;
 using Core.Domain.Conversation;
 using Core.Domain.Group;
+using Core.Domain.GroupProject;
 using Core.Domain.Project;
 using Core.Domain.ProjectUser;
 using Core.Domain.Report;
@@ -17,10 +18,11 @@ namespace Infrastructure.EntityFramework
     {
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Conversation> Conversations { get; set; }
+        public virtual DbSet<GroupProject> GroupProjects { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectUser> ProjectUsers { get; set; }
-        public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<WorkItem> Reports { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<User> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -42,7 +44,7 @@ namespace Infrastructure.EntityFramework
             modelBuilder.Entity<Project>()
                 .Property(p => p.ProjectId)
                 .ValueGeneratedOnAdd();
-            modelBuilder.Entity<Report>()
+            modelBuilder.Entity<WorkItem>()
                 .Property(r => r.ReportId)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<Task>()
@@ -51,6 +53,11 @@ namespace Infrastructure.EntityFramework
             modelBuilder.Entity<User>()
                 .Property(u => u.UserId)
                 .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Account>()
+                .HasOne(a => a.User)
+                .WithOne(u => u.Account)
+                .HasForeignKey<User>(u => u.AccountId);
         }
     }
 }
