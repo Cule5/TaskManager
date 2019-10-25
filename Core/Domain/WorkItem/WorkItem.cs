@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Domain.Report
+namespace Core.Domain.WorkItem
 {
     public class WorkItem
     {

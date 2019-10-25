@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Domain.Report.Repositories;
+using Core.Domain.WorkItem.Repositories;
 using Infrastructure.EntityFramework;
 
 namespace Infrastructure.Repositories.WorkItem
@@ -14,18 +14,18 @@ namespace Infrastructure.Repositories.WorkItem
         {
             _dbContext = dbContext;
         }
-        public async Task<Core.Domain.Report.WorkItem> GetAsync(int reportId)
+        public async Task<Core.Domain.WorkItem.WorkItem> GetAsync(int reportId)
         {
             return await _dbContext.Reports.FindAsync(reportId);
         }
 
-        public async System.Threading.Tasks.Task AddAsync(Core.Domain.Report.WorkItem workItem)
+        public async System.Threading.Tasks.Task AddAsync(Core.Domain.WorkItem.WorkItem workItem)
         {
             await _dbContext.AddAsync(workItem);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Core.Domain.Report.WorkItem> FindAsync(Core.Domain.Report.WorkItem workItem)
+        public async Task<Core.Domain.WorkItem.WorkItem> FindAsync(Core.Domain.WorkItem.WorkItem workItem)
         {
             throw new NotImplementedException();
         }

@@ -7,7 +7,7 @@ using Core.Domain.Group;
 using Core.Domain.GroupProject;
 using Core.Domain.Project;
 using Core.Domain.ProjectUser;
-using Core.Domain.Report;
+using Core.Domain.WorkItem;
 using Core.Domain.Task;
 using Core.Domain.User;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +18,8 @@ namespace Infrastructure.EntityFramework
     {
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Conversation> Conversations { get; set; }
-        public virtual DbSet<GroupProject> GroupProjects { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<GroupProject> GroupProjects { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectUser> ProjectUsers { get; set; }
         public virtual DbSet<WorkItem> Reports { get; set; }

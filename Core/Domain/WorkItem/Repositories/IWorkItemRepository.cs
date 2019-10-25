@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Core.Domain.Report.Repositories
+namespace Core.Domain.WorkItem.Repositories
 {
     public interface IWorkItemRepository
     {

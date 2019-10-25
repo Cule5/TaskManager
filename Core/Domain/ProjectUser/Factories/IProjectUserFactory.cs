@@ -7,6 +7,6 @@ namespace Core.Domain.ProjectUser.Factories
 {
     public interface IProjectUserFactory
     {
-        Task<ProjectUser> CreateAsync();
+        Task<ProjectUser> CreateAsync(Project.Project project, User.User user);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Domain.Report.Factories
+namespace Core.Domain.WorkItem.Factories
 {
     public class ReportFactory:IReportFactory
     {

@@ -7,9 +7,9 @@ namespace Core.Domain.ProjectUser.Factories
 {
     public class ProjectUserFactory:IProjectUserFactory
     {
-        public Task<ProjectUser> CreateAsync()
+        public Task<ProjectUser> CreateAsync(Project.Project project,User.User user)
         {
-            throw new NotImplementedException();
+            return System.Threading.Tasks.Task.Factory.StartNew(()=>new ProjectUser(project,user));
         }
     }
 }
