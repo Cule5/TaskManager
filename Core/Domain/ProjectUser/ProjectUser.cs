@@ -6,6 +6,10 @@ namespace Core.Domain.ProjectUser
 {
     public class ProjectUser
     {
+        public ProjectUser()
+        {
+
+        }
         public ProjectUser(Project.Project project,User.User user)
         {
             Project = project;

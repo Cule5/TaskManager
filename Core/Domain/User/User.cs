@@ -9,6 +9,10 @@ namespace Core.Domain.User
 {
     public class User
     {
+        public User()
+        {
+
+        }
         public User(string name,string lastName)
         {
             Name = name;
@@ -24,11 +28,12 @@ namespace Core.Domain.User
         public string Name { get; set; }
         public string LastName { get; set; }
         public EUserType UserType { get; set; }
-        public int GroupId { get; set; }
         public virtual Group.Group Group { get; set; }
         public int AccountId { get; set; }
-        public Account.Account Account { get; set; }
+        public virtual Account.Account Account { get; set; }
         public virtual ICollection<Task.Task> Tasks { get; set; }
+        public virtual ICollection<Conversation.Conversation> Conversations { get; set; }
+        public virtual ICollection<ProjectUser.ProjectUser> ProjectUsers { get; set; }
         
         public override bool Equals(object obj)
         {

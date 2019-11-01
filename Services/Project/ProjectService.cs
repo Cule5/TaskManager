@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Services.Dispatcher.Event;
+using Core.Domain.Project.Factories;
+using Core.Domain.Project.Repositories;
+
 
 namespace Services.Project
 {
     public class ProjectService:IProjectService
     {
-        private readonly IEventDispatcher _eventDispatcher = null;
-        public ProjectService(IEventDispatcher eventDispatcher)
+        private readonly IProjectRepository _projectRepository = null;
+        private readonly IProjectFactory _projectFactory = null;
+        public ProjectService(IProjectRepository projectRepository, IProjectFactory projectFactory)
         {
-            _eventDispatcher = eventDispatcher;
+            _projectRepository = projectRepository;
+            _projectFactory = projectFactory;
         }
-        public System.Threading.Tasks.Task AddProjectAsync()
+        public async System.Threading.Tasks.Task CreateProjectAsync()
         {
             throw new NotImplementedException();
         }

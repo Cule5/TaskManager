@@ -16,9 +16,9 @@ namespace Core.Domain.Account.Factories
         }
         public async Task<Account> CreateAsync(string login, string password)
         {
-            var dbAccount=await _accountRepository.FindAsync(login);
+            var dbAccount=await _accountRepository.FindByLoginAsync(login);
             if(dbAccount!=null)
-                throw new LoginException("User with given login already exists");
+                throw new LoginPasswordException("User with given login already exists");
             return new Account(login,password);
         }
     }

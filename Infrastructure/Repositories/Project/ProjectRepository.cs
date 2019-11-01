@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Domain.Project.Repositories;
 using Infrastructure.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories.Project
 {
@@ -26,9 +27,9 @@ namespace Infrastructure.Repositories.Project
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Core.Domain.Project.Project> FindAsync(Core.Domain.Project.Project project)
+        public async Task<Core.Domain.Project.Project> FindAsync(string projectName)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Projects.FirstOrDefaultAsync(p=>p.Equals(new Core.Domain.Project.Project(projectName)));
         }
     }
 }

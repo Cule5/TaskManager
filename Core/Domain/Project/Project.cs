@@ -6,19 +6,27 @@ namespace Core.Domain.Project
 {
     public class Project
     {
-        public Project(string projectName,string description,DateTime startDate)
+        public Project()
+        {
+
+        }
+        public Project(string projectName)
+        {
+            ProjectName = projectName;
+        }
+        public Project(string projectName,string description,DateTime startDate,DateTime endDate)
         {
             ProjectName = projectName;
             Description = description;
             StartDate = startDate;
+            EndDate = endDate;
         }
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
-        public virtual ICollection<GroupProject.GroupProject> GroupProjects { get; set; }
-        public virtual ICollection<User.User> Users { get; set; }
-        public virtual ICollection<Task.Task> Tasks { get; set; }
+        public DateTime EndDate { get; set; }
+        public virtual ICollection<ProjectUser.ProjectUser> ProjectUsers { get; set; }
         public override bool Equals(object obj)
         {
             return base.Equals(obj as Project);

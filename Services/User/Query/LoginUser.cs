@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Services.Common.Command;
+using Infrastructure.Authentication;
+using Services.Common.Query;
 
-namespace Services.User.Command
+namespace Services.User.Query
 {
-    public class LoginUser:ICommand
+    public class LoginUser:IQuery<JsonWebToken>
     {
         public string Login { get; set; }
         public string Password { get; set; }

@@ -15,7 +15,7 @@ namespace Infrastructure.Repositories.GroupProject
         }
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.GroupProject.GroupProject groupProject)
         {
-            await _dbContext.GroupProjects.AddAsync(groupProject);
+            //await _dbContext.GroupProjects.AddAsync(groupProject);
             await _dbContext.SaveChangesAsync();
         }
     }

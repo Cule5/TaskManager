@@ -6,6 +6,10 @@ namespace Core.Domain.Account
 {
     public class Account
     {
+        public Account()
+        {
+
+        }
         public Account(string login)
         {
             Login = login;
@@ -18,7 +22,7 @@ namespace Core.Domain.Account
         public int AccountId { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public User.User User { get; set; }
+        public virtual User.User User { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -29,14 +33,17 @@ namespace Core.Domain.Account
         {
             if (account == null)
                 return false;
-            if (object.ReferenceEquals(this, account))
-                return true;
-            return Login == account.Login;
+            return account.Login.Equals(Login) && account.Password.Equals(Password);
         }
 
         public override int GetHashCode()
         {
-            return AccountId;
+            return (GetRealType().ToString() + AccountId).GetHashCode();
+        }
+
+        private Type GetRealType()
+        {
+            return GetType();
         }
     }
 }

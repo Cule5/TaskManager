@@ -16,7 +16,7 @@ namespace Infrastructure.Repositories.WorkItem
         }
         public async Task<Core.Domain.WorkItem.WorkItem> GetAsync(int reportId)
         {
-            return await _dbContext.Reports.FindAsync(reportId);
+            return await _dbContext.WorkItems.FindAsync(reportId);
         }
 
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.WorkItem.WorkItem workItem)

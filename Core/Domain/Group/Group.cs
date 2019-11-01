@@ -7,6 +7,10 @@ namespace Core.Domain.Group
 {
     public class Group
     {
+        public Group()
+        {
+
+        }
         public Group(string groupName)
         {
             GroupName = groupName;
@@ -14,7 +18,7 @@ namespace Core.Domain.Group
         public int GroupId { get; set; }
         public string GroupName { get; set; }
         public virtual ICollection<User.User> Users { get; set; }
-        public virtual ICollection<GroupProject.GroupProject> GroupProjects { get; set; }
+        
         public override bool Equals(object obj)
         {
             return base.Equals(obj as Group);

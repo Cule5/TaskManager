@@ -19,12 +19,12 @@ namespace Infrastructure.EntityFramework
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Conversation> Conversations { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
-        public virtual DbSet<GroupProject> GroupProjects { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectUser> ProjectUsers { get; set; }
-        public virtual DbSet<WorkItem> Reports { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<WorkItem> WorkItems { get; set; }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Server=localhost;Database=TaskManagerDataBase;Trusted_Connection=True;");
@@ -45,7 +45,7 @@ namespace Infrastructure.EntityFramework
                 .Property(p => p.ProjectId)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<WorkItem>()
-                .Property(r => r.ReportId)
+                .Property(w => w.WorkItemID)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<Task>()
                 .Property(t => t.TaskId)
@@ -58,6 +58,61 @@ namespace Infrastructure.EntityFramework
                 .HasOne(a => a.User)
                 .WithOne(u => u.Account)
                 .HasForeignKey<User>(u => u.AccountId);
+
+            modelBuilder.Entity<Group>()
+                .HasMany(g => g.Users)
+                .WithOne(u => u.Group);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Tasks)
+                .WithOne(t=>t.User);
+
+            modelBuilder.Entity<Task>()
+                .HasMany(t => t.WorkItems)
+                .WithOne(w => w.Task);
+
+            modelBuilder.Entity<ProjectUser>()
+                .HasKey(pu=>new{pu.ProjectId,pu.UserId});
+            modelBuilder.Entity<ProjectUser>()
+                .HasOne(pu => pu.Project)
+                .WithMany(p=>p.ProjectUsers)
+                .HasForeignKey(pu=>pu.ProjectId);
+            modelBuilder.Entity<ProjectUser>()
+                .HasOne(pu=>pu.User)
+                .WithMany(u=>u.ProjectUsers)
+                .HasForeignKey(pu=>pu.UserId);
+
+            //modelBuilder.Entity<Conversation>()
+            //    .HasOne(c => c.Receiver)
+            //    .WithMany(u => u.Conversations)
+            //    .HasForeignKey(c => c.ReceiverId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+            //modelBuilder.Entity<Conversation>()
+            //    .HasOne(c => c.Sender)
+            //    .WithMany(u => u.Conversations)
+            //    .HasForeignKey(c => c.SenderId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Conversation>(entity =>
+            {
+                entity.HasOne(c => c.Receiver)
+                    .WithMany()
+
+                    .OnDelete(DeleteBehavior.Restrict);
+
+
+                entity.HasOne(c => c.Sender)
+                    .WithMany()
+                    
+                    .OnDelete(DeleteBehavior.Restrict);
+
+
+            });
+
+
+
+
+
         }
     }
 }

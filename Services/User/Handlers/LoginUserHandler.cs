@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Services.Common.Command;
+using Infrastructure.Authentication;
+using Services.Common.Query;
 using Services.User.Command;
+using Services.User.Query;
 
 namespace Services.User.Handlers
 {
-    public class LoginUserHandler:ICommandHandler<LoginUser>
+    public class LoginUserHandler:IQueryHandler<LoginUser,JsonWebToken>
     {
         private readonly IUserService _userService = null;
         public LoginUserHandler(IUserService userService)
         {
             _userService = userService;
         }
-        public async System.Threading.Tasks.Task HandleAsync(LoginUser command)
+
+        public async Task<JsonWebToken> HandleAsync(LoginUser query)
         {
-            await _userService.Login(command.Login,command.Password);
+            return await _userService.Login(query.Login, query.Password);
         }
     }
 }

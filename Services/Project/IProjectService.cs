@@ -6,6 +6,6 @@ namespace Services.Project
 {
     public interface IProjectService
     {
-        System.Threading.Tasks.Task AddProjectAsync();
+        System.Threading.Tasks.Task CreateProjectAsync();
     }
 }

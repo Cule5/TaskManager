@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Core.Domain.Common;
 using Infrastructure;
+using Infrastructure.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,16 +18,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Services;
 
 namespace Api
 {
-    public class Startup
+
+public class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
 
         public IConfiguration Configuration { get; }
         public IContainer Container { get; private set; }
@@ -32,17 +39,37 @@ namespace Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            var jwtSetting=new JwtSettings();
+            Configuration.GetSection("jwt").Bind(jwtSetting);
             
+            services.AddAuthentication().AddJwtBearer((configuration)=>
+            {
+                
+                configuration.TokenValidationParameters=new TokenValidationParameters()
+                {
+                    ValidIssuer = "http://localhost:51524",
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting.Key))
+                };
+               
+            });
+            services.AddAuthorization((configuration) =>
+            {
+                configuration.AddPolicy("CompanyAdmin",r=>r.RequireRole(EUserType.CompanyAdmin.ToString()));
+            });
+
+
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .AsImplementedInterfaces();
 
-            InfrastructureContainer.Build(builder);
+            InfrastructureContainer.Build(builder,Configuration);
             ServiceContainer.Build(builder);
 
             builder.Populate(services);
             Container = builder.Build();
-            
+
             return new AutofacServiceProvider(Container);
         }
 
@@ -59,6 +86,7 @@ namespace Api
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

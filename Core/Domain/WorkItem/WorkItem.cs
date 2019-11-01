@@ -6,17 +6,20 @@ namespace Core.Domain.WorkItem
 {
     public class WorkItem
     {
+        public WorkItem()
+        {
+
+        }
         public WorkItem(string comment,double time,DateTime reportDate)
         {
             Comment = comment;
             Time = time;
             ReportDate = reportDate;
         }
-        public int ReportId { get; set; }
+        public int WorkItemID { get; set; }
         public string Comment { get; set; }
         public double Time { get; set; }
         public DateTime ReportDate { get; set; }
-        public int TaskId { get; set; }
         public virtual Task.Task Task { get; set; }
         public override bool Equals(object obj)
         {
@@ -34,7 +37,7 @@ namespace Core.Domain.WorkItem
 
         public override int GetHashCode()
         {
-            return ReportId;
+            return WorkItemID;
         }
     }
 }

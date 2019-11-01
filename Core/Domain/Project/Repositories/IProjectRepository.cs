@@ -9,7 +9,7 @@ namespace Core.Domain.Project.Repositories
     {
         System.Threading.Tasks.Task<Project> GetAsync(int projectId);
         System.Threading.Tasks.Task AddAsync(Project project);
-        System.Threading.Tasks.Task<Project> FindAsync(Project project);
+        System.Threading.Tasks.Task<Project> FindAsync(string projectName);
 
     }
 }

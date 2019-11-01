@@ -9,6 +9,10 @@ namespace Core.Domain.Task
 {
     public class Task
     {
+        public Task()
+        {
+
+        }
         public Task(string description,ETaskPriority taskPriority,DateTime startDate,DateTime endDate)
         {
             Description = description;
@@ -22,9 +26,19 @@ namespace Core.Domain.Task
         public ETaskType TaskType { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int UserId { get; set; }
         public virtual User.User User { get; set; }
         public virtual ICollection<WorkItem.WorkItem> WorkItems { get; set; }
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj as Task);
+        }
+
+        public virtual bool Equals(Task task)
+        {
+            if (task == null)
+                return false;
+            return task.Description.Equals(Description)&&task.TaskPriority==TaskPriority&&task.TaskType==TaskType&&task.StartDate==StartDate&&task.EndDate==EndDate;
+        }
         public override int GetHashCode()
         {
             return TaskId;

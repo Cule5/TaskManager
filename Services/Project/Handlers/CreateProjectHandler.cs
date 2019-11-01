@@ -15,7 +15,7 @@ namespace Services.Project.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(CreateProject command)
         {
-            await _projectService.AddProjectAsync();
+            await _projectService.CreateProjectAsync();
         }
     }
 }
