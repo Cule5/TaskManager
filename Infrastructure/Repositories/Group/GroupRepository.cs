@@ -34,5 +34,10 @@ namespace Infrastructure.Repositories.Group
         {
             return await _dbContext.Groups.FirstOrDefaultAsync(g=>g.Equals(new Core.Domain.Group.Group(groupName)));
         }
+
+        public async Task<List<Core.Domain.Group.Group>> AllGroups()
+        {
+            return await _dbContext.Groups.ToListAsync();
+        }
     }
 }

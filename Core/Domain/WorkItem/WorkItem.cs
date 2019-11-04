@@ -16,7 +16,7 @@ namespace Core.Domain.WorkItem
             Time = time;
             ReportDate = reportDate;
         }
-        public int WorkItemID { get; set; }
+        public int WorkItemId { get; set; }
         public string Comment { get; set; }
         public double Time { get; set; }
         public DateTime ReportDate { get; set; }
@@ -37,7 +37,7 @@ namespace Core.Domain.WorkItem
 
         public override int GetHashCode()
         {
-            return WorkItemID;
+            return WorkItemId;
         }
     }
 }

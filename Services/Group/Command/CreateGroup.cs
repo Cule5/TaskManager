@@ -8,6 +8,5 @@ namespace Services.Group.Command
     public class CreateGroup:ICommand
     {
         public string GroupName { get; set; }
-        public int UserId { get; set; }
     }
 }

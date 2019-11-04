@@ -7,7 +7,8 @@ namespace Services.Group
     public interface IGroupService
     {
         System.Threading.Tasks.Task CreateGroup(string groupName);
-        System.Threading.Tasks.Task DeleteGroup();
+        System.Threading.Tasks.Task DeleteGroup(string groupName);
+        System.Threading.Tasks.Task<List<string>> AllGroups();
 
     }
 }

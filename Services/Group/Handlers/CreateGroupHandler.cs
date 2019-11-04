@@ -8,9 +8,14 @@ namespace Services.Group.Handlers
 {
     public class CreateGroupHandler:ICommandHandler<CreateGroup>
     {
-        public System.Threading.Tasks.Task HandleAsync(CreateGroup command)
+        private readonly IGroupService _groupService = null;
+        public CreateGroupHandler(IGroupService groupService)
         {
-            throw new NotImplementedException();
+            _groupService = groupService;
+        }
+        public async System.Threading.Tasks.Task HandleAsync(CreateGroup command)
+        {
+            await _groupService.CreateGroup(command.GroupName);
         }
     }
 }

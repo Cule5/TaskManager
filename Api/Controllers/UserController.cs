@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http;
 using Infrastructure.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
@@ -15,8 +15,8 @@ using Services.User.Query;
 namespace Api.Controllers
 {
     //[Authorize]
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
-    public class UserController : ApiController
+    [Route("api/[controller]")]
+    public class UserController : Controller
     {
         private readonly ICommandDispatcher _commandDispatcher = null;
         private readonly IQueryDispatcher _queryDispatcher = null;
@@ -27,7 +27,7 @@ namespace Api.Controllers
         }
         [Microsoft.AspNetCore.Mvc.HttpPost]
         [Microsoft.AspNetCore.Mvc.Route("Register")]
-        public async Task<IHttpActionResult> RegisterUser([Microsoft.AspNetCore.Mvc.FromBody]RegisterUser command)
+        public async Task<IActionResult> RegisterUser([Microsoft.AspNetCore.Mvc.FromBody]RegisterUser command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
@@ -36,7 +36,7 @@ namespace Api.Controllers
         [AllowAnonymous]
         [Microsoft.AspNetCore.Mvc.HttpPost]
         [Microsoft.AspNetCore.Mvc.Route("Login")]
-        public async Task<IHttpActionResult> LoginUser([Microsoft.AspNetCore.Mvc.FromBody]LoginUser query)
+        public async Task<IActionResult> LoginUser([Microsoft.AspNetCore.Mvc.FromBody]LoginUser query)
         {
             try
             {
@@ -44,16 +44,16 @@ namespace Api.Controllers
             }
             catch (Exception ex)
             {
-
+                return Ok();
             }
 
-            return Ok();
+            
 
         }
         
         [Microsoft.AspNetCore.Mvc.HttpPut]
         [Microsoft.AspNetCore.Mvc.Route("Logout")]
-        public async Task<IHttpActionResult> LogoutAsync()
+        public async Task<IActionResult> LogoutAsync()
         {
             return Ok();
         }

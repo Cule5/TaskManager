@@ -45,7 +45,7 @@ namespace Infrastructure.EntityFramework
                 .Property(p => p.ProjectId)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<WorkItem>()
-                .Property(w => w.WorkItemID)
+                .Property(w => w.WorkItemId)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<Task>()
                 .Property(t => t.TaskId)

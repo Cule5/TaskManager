@@ -7,6 +7,7 @@ namespace Core.Domain.Common
     public enum EUserType
     {
         CompanyAdmin,
+        ProjectManager,
         Worker,
         
     }

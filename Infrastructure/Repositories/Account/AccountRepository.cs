@@ -27,10 +27,7 @@ namespace Infrastructure.Repositories.Account
 
         public async Task<Core.Domain.Account.Account> FindAsync(string login,string password)
         {
-            //return await _dbContext.Accounts.FirstOrDefaultAsync(a=>a.Login.Equals(login)&&a.Password.Equals(password));
-            var account = new Core.Domain.Account.Account(login, password);
-            return await _dbContext.Accounts.FirstOrDefaultAsync(a => a.Equals(account));
-
+            return await _dbContext.Accounts.FirstOrDefaultAsync(a => a.Login.Equals(login) && a.Password.Equals(password));
         }
 
         public async Task<Core.Domain.Account.Account> FindByLoginAsync(string login)

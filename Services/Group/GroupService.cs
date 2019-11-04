@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Core.Domain.Group.Factories;
 using Core.Domain.Group.Repositories;
 
@@ -21,9 +22,20 @@ namespace Services.Group
             await _groupRepository.AddAsync(newGroup);
         }
 
-        public System.Threading.Tasks.Task DeleteGroup()
+        public async System.Threading.Tasks.Task DeleteGroup(string groupName)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public async Task<List<string>> AllGroups()
+        {
+            var groupsList = await _groupRepository.AllGroups();
+            var groupNameList=new List<string>();
+            foreach (var group in groupsList)
+            {
+                groupNameList.Add(group.GroupName);
+            }
+            return groupNameList;
         }
     }
 }
