@@ -10,8 +10,8 @@ namespace Services.User.Command
     {
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public string GroupName { get; set; }
+        public IEnumerable<string> Projects { get; set; }
         public EUserType UserType { get; set; }
     }
 }

@@ -28,20 +28,6 @@ namespace Core.Domain.Task
         public DateTime EndDate { get; set; }
         public virtual User.User User { get; set; }
         public virtual ICollection<WorkItem.WorkItem> WorkItems { get; set; }
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj as Task);
-        }
-
-        public virtual bool Equals(Task task)
-        {
-            if (task == null)
-                return false;
-            return task.Description.Equals(Description)&&task.TaskPriority==TaskPriority&&task.TaskType==TaskType&&task.StartDate==StartDate&&task.EndDate==EndDate;
-        }
-        public override int GetHashCode()
-        {
-            return TaskId;
-        }
+        
     }
 }

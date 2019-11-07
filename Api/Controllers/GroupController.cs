@@ -36,9 +36,11 @@ namespace Api.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("AllGroups")]
         public async Task<IActionResult> AllGroups()
         {
-            return Ok(_groupService.AllGroups());
+            return Ok(await _groupService.AllGroups());
         }
        
     }

@@ -18,21 +18,21 @@ namespace Infrastructure.Repositories.Account
         }
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.Account.Account account)
         {
-            var dbAccount = await FindAsync(account.Login,account.Password);
+            var dbAccount = await FindByEmailAsync(account.Email);
             if(dbAccount!=null)
-                throw new LoginPasswordException("User with given login already exists");
+                throw new EmailException("User with given email already exists");
             await _dbContext.AddAsync(account);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Core.Domain.Account.Account> FindAsync(string login,string password)
+        public async Task<Core.Domain.Account.Account> FindAsync(string email,string password)
         {
-            return await _dbContext.Accounts.FirstOrDefaultAsync(a => a.Login.Equals(login) && a.Password.Equals(password));
+            return await _dbContext.Accounts.FirstOrDefaultAsync(a => a.Email.Equals(email) && a.Password.Equals(password));
         }
 
-        public async Task<Core.Domain.Account.Account> FindByLoginAsync(string login)
+        public async Task<Core.Domain.Account.Account> FindByEmailAsync(string email)
         {
-            return await _dbContext.Accounts.FirstOrDefaultAsync(a=>a.Equals(new Core.Domain.Account.Account(login)));
+            return await _dbContext.Accounts.FirstOrDefaultAsync(a=>a.Email.Equals(email));
         }
     }
 }

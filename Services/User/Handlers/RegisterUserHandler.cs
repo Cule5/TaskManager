@@ -21,8 +21,8 @@ namespace Services.User.Handlers
             {
                 Name = command.Name,
                 LastName = command.LastName,
-                Login = command.Login,
-                Password = command.Password,
+                GroupName = command.GroupName,
+                Projects = command.Projects,
                 UserType=command.UserType
             };
             await _userService.RegisterAsync(registerUserDto);

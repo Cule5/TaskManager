@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191031225505_init")]
+    [Migration("20191105192646_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Login");
+                    b.Property<string>("Email");
 
                     b.Property<string>("Password");
 
@@ -83,8 +83,6 @@ namespace Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
-
-                    b.Property<DateTime>("EndDate");
 
                     b.Property<string>("ProjectName");
 
@@ -161,7 +159,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Domain.WorkItem.WorkItem", b =>
                 {
-                    b.Property<int>("WorkItemID")
+                    b.Property<int>("WorkItemId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -173,7 +171,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<double>("Time");
 
-                    b.HasKey("WorkItemID");
+                    b.HasKey("WorkItemId");
 
                     b.HasIndex("TaskId");
 

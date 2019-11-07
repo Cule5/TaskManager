@@ -9,6 +9,6 @@ namespace Core.Domain.Account.Repositories
     {
         System.Threading.Tasks.Task AddAsync(Account account);
         Task<Account> FindAsync(string login,string password);
-        Task<Account> FindByLoginAsync(string login);
+        Task<Account> FindByEmailAsync(string login);
     }
 }

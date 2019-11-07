@@ -2,30 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
+using Services.Project;
 using Services.Project.Command;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Api.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
-    public class ProjectController : ApiController
+    [Route("api/[controller]")]
+    public class ProjectController : Controller
     {
         private readonly ICommandDispatcher _commandDispatcher=null;
         private readonly IQueryDispatcher _queryDispatcher = null;
-        public ProjectController(ICommandDispatcher commandDispatcher,IQueryDispatcher queryDispatcher)
+        private readonly IProjectService _projectService = null;
+        public ProjectController(ICommandDispatcher commandDispatcher,IQueryDispatcher queryDispatcher,IProjectService projectService)
         {
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
+            _projectService = projectService;
         }
-
-        public async Task<IHttpActionResult> CreateProjectAsync([FromBody]CreateProject command)
+        
+        public async Task<IActionResult> CreateProjectAsync([FromBody]CreateProject command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("AllProjects")]
+        public async Task<IActionResult> AllProjects()
+        {
+            return Ok(await _projectService.AllProjectsAsync());
+        }
+
+
     }
 }

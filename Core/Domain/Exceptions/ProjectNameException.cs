@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Core.Domain.Exceptions
 {
-    public class LoginPasswordException:Exception
+    public class ProjectNameException:Exception
     {
-        public LoginPasswordException(string message):base(message)
+        public ProjectNameException(string message):base(message)
         {
 
         }

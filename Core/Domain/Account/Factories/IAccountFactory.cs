@@ -7,6 +7,6 @@ namespace Core.Domain.Account.Factories
 {
     public interface IAccountFactory
     {
-        Task<Account> CreateAsync(string login,string password);
+        Task<Account> CreateAsync(string email);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Domain.Project.Repositories;
@@ -27,9 +28,25 @@ namespace Infrastructure.Repositories.Project
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Core.Domain.Project.Project> FindAsync(string projectName)
+        public async Task<Core.Domain.Project.Project> FindByName(string projectName)
         {
             return await _dbContext.Projects.FirstOrDefaultAsync(p=>p.Equals(new Core.Domain.Project.Project(projectName)));
+        }
+
+        public async Task<IEnumerable<Core.Domain.Project.Project>> FindProjectsByNames(IEnumerable<string> projects)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<string>> GetAllProjects()
+        {
+            return System.Threading.Tasks.Task.Factory.StartNew<IEnumerable<string>>(() =>
+            {
+                var projects = _dbContext.Projects;
+                var result = projects.Select(project => project.ProjectName).ToList();
+                return result;
+            });
+            
         }
     }
 }

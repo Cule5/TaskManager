@@ -14,7 +14,7 @@ using Services.User.Query;
 
 namespace Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     public class UserController : Controller
     {
@@ -25,9 +25,11 @@ namespace Api.Controllers
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
         }
-        [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.Route("Register")]
-        public async Task<IActionResult> RegisterUser([Microsoft.AspNetCore.Mvc.FromBody]RegisterUser command)
+
+        [Authorize(Policy = "CompanyAdmin")]
+        [HttpPost]
+        [Route("Register")]
+        public async Task<IActionResult> RegisterUser([FromBody]RegisterUser command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
@@ -36,7 +38,7 @@ namespace Api.Controllers
         [AllowAnonymous]
         [Microsoft.AspNetCore.Mvc.HttpPost]
         [Microsoft.AspNetCore.Mvc.Route("Login")]
-        public async Task<IActionResult> LoginUser([Microsoft.AspNetCore.Mvc.FromBody]LoginUser query)
+        public async Task<IActionResult> LoginUser([FromBody]LoginUser query)
         {
             try
             {
@@ -51,8 +53,8 @@ namespace Api.Controllers
 
         }
         
-        [Microsoft.AspNetCore.Mvc.HttpPut]
-        [Microsoft.AspNetCore.Mvc.Route("Logout")]
+        [HttpPut]
+        [Route("Logout")]
         public async Task<IActionResult> LogoutAsync()
         {
             return Ok();

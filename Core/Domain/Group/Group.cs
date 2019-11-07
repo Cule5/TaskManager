@@ -19,23 +19,7 @@ namespace Core.Domain.Group
         public string GroupName { get; set; }
         public virtual ICollection<User.User> Users { get; set; }
         
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj as Group);
-        }
-
-        public virtual bool Equals(Group group)
-        {
-            if (group == null)
-                return false;
-            if (object.ReferenceEquals(this, group))
-                return true;
-            return GroupName.Equals(group.GroupName);
-        }
-
-        public override int GetHashCode()
-        {
-            return GroupId;
-        }
+        
+        
     }
 }

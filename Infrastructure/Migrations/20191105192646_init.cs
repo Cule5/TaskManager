@@ -14,7 +14,7 @@ namespace Infrastructure.Migrations
                 {
                     AccountId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Login = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -43,8 +43,7 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ProjectName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false)
+                    StartDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -167,7 +166,7 @@ namespace Infrastructure.Migrations
                 name: "WorkItems",
                 columns: table => new
                 {
-                    WorkItemID = table.Column<int>(nullable: false)
+                    WorkItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Comment = table.Column<string>(nullable: true),
                     Time = table.Column<double>(nullable: false),
@@ -176,7 +175,7 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkItems", x => x.WorkItemID);
+                    table.PrimaryKey("PK_WorkItems", x => x.WorkItemId);
                     table.ForeignKey(
                         name: "FK_WorkItems_Tasks_TaskId",
                         column: x => x.TaskId,

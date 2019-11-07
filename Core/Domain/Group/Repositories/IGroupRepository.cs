@@ -9,7 +9,7 @@ namespace Core.Domain.Group.Repositories
     {
         Task<Group> GetAsync(int groupId);
         System.Threading.Tasks.Task AddAsync(Group group);
-        Task<Group> FindAsync(string groupName);
+        Task<Group> FindByName(string groupName);
         Task<List<Group>> AllGroups();
     }
 }
