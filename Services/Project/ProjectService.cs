@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Domain.Project.Factories;
 using Core.Domain.Project.Repositories;
+using Services.Project.Dtos;
 
 
 namespace Services.Project
@@ -17,9 +18,10 @@ namespace Services.Project
             _projectRepository = projectRepository;
             _projectFactory = projectFactory;
         }
-        public async System.Threading.Tasks.Task CreateProjectAsync()
+        public async System.Threading.Tasks.Task CreateProjectAsync(CreateProjectDto createProjectDto)
         {
-            throw new NotImplementedException();
+            var newProject=await _projectFactory.CreateAsync(createProjectDto.ProjectName,createProjectDto.Description,createProjectDto.StartDate);
+            await _projectRepository.AddAsync(newProject);
         }
 
         public async Task<IEnumerable<string>> AllProjectsAsync()

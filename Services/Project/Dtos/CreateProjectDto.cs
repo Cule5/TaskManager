@@ -6,8 +6,14 @@ namespace Services.Project.Dtos
 {
     public class CreateProjectDto
     {
-        public string ProjectName { get; set; }
-        public string Description { get; set; }
-        public DateTime StartDate { get; set; }
+        public CreateProjectDto(string projectName,string description,DateTime startDate)
+        {
+            ProjectName = projectName;
+            Description = description;
+            StartDate = startDate;
+        }
+        public string ProjectName { get;  }
+        public string Description { get; }
+        public DateTime StartDate { get; }
     }
 }

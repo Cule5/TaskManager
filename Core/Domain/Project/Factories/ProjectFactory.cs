@@ -13,9 +13,9 @@ namespace Core.Domain.Project.Factories
         {
             _projectRepository = projectRepository;
         }
-        public async Task<Project> CreateAsync(string projectName,string description,DateTime startDate, DateTime expectedDateOfCompletion)
+        public async Task<Project> CreateAsync(string projectName,string description,DateTime startDate)
         {
-            var dbProject=await _projectRepository.FindByName(projectName);
+            var dbProject=await _projectRepository.FindByNameAsync(projectName);
             return dbProject ?? new Project(projectName, description, startDate);
         }
     }

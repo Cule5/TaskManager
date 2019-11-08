@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Services.Common.Command;
 using Services.Project.Command;
+using Services.Project.Dtos;
 
 namespace Services.Project.Handlers
 {
@@ -15,7 +16,8 @@ namespace Services.Project.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(CreateProject command)
         {
-            await _projectService.CreateProjectAsync();
+            var createProjectDto = new CreateProjectDto(command.ProjectName,command.ProjectDescription,command.StartDate);
+            await _projectService.CreateProjectAsync(createProjectDto);
         }
     }
 }

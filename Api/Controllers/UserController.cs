@@ -49,8 +49,6 @@ namespace Api.Controllers
                 return Ok();
             }
 
-            
-
         }
         
         [HttpPut]
@@ -59,5 +57,7 @@ namespace Api.Controllers
         {
             return Ok();
         }
+
+       
     }
 }

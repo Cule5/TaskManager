@@ -32,7 +32,7 @@ namespace Infrastructure.Repositories.Group
 
         public async Task<Core.Domain.Group.Group> FindByName(string groupName)
         {
-            return await _dbContext.Groups.FirstOrDefaultAsync(g=>g.Equals(new Core.Domain.Group.Group(groupName)));
+            return await _dbContext.Groups.FirstOrDefaultAsync(g=>g.GroupName.Equals(groupName));
         }
 
         public async Task<List<Core.Domain.Group.Group>> AllGroups()

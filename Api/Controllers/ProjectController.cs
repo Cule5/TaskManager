@@ -25,7 +25,9 @@ namespace Api.Controllers
             _projectService = projectService;
         }
         
-        public async Task<IActionResult> CreateProjectAsync([FromBody]CreateProject command)
+        [HttpPost]
+        [Route("CreateProject")]
+        public async Task<IActionResult> CreateProject([FromBody]CreateProject command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();

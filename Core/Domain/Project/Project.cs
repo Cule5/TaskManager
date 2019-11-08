@@ -10,10 +10,7 @@ namespace Core.Domain.Project
         {
 
         }
-        public Project(string projectName)
-        {
-            ProjectName = projectName;
-        }
+        
         public Project(string projectName,string description,DateTime startDate)
         {
             ProjectName = projectName;

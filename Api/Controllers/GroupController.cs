@@ -27,7 +27,7 @@ namespace Api.Controllers
             _queryDispatcher = queryDispatcher;
             _groupService = groupService;
         }
-        [Authorize(Policy = "CompanyAdmin")]
+        //[Authorize(Policy = "CompanyAdmin")]
         [HttpPost]
         [Route("CreateGroup")]
         public async Task<IActionResult> CreateGroup([FromBody]CreateGroup command)
