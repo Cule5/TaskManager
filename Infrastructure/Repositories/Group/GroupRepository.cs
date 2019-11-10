@@ -25,9 +25,8 @@ namespace Infrastructure.Repositories.Group
         {
             var dbGroup=await FindByName(group.GroupName);
             if(dbGroup!=null)
-                throw new GroupNameException("Group like this already exists");
+                return;
             await _dbContext.Groups.AddAsync(group);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Core.Domain.Group.Group> FindByName(string groupName)

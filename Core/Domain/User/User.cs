@@ -18,7 +18,7 @@ namespace Core.Domain.User
             Name = name;
             LastName = lastName;
         }
-        public User(string name,string lastName,EUserType userType,Account.Account account)
+        public User(string name,string lastName,EUserType userType)
         {
             Name = name;
             LastName = lastName;
@@ -31,27 +31,10 @@ namespace Core.Domain.User
         public virtual Group.Group Group { get; set; }
         public int AccountId { get; set; }
         public virtual Account.Account Account { get; set; }
-        public virtual ICollection<Task.Task> Tasks { get; set; }
-        public virtual ICollection<Conversation.Conversation> Conversations { get; set; }
-        public virtual ICollection<ProjectUser.ProjectUser> ProjectUsers { get; set; }
+        public virtual ICollection<Task.Task> Tasks { get; set; }=new List<Task.Task>();
+        public virtual ICollection<Conversation.Conversation> Conversations { get; set; }=new List<Conversation.Conversation>();
+        public virtual ICollection<ProjectUser.ProjectUser> ProjectUsers { get; set; }=new List<ProjectUser.ProjectUser>();
         
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as User);
-        }
-
-        public virtual bool Equals(User user)
-        {
-            if (user == null)
-                return false;
-            if (object.ReferenceEquals(this, user))
-                return true;
-            return Name == user.Name && LastName == user.LastName;
-        }
-
-        public override int GetHashCode()
-        {
-            return UserId;
-        }
+        
     }
 }

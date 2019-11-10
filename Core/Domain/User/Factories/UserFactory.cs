@@ -19,12 +19,11 @@ namespace Core.Domain.User.Factories
             _accountRepository = accountRepository;
         }
 
-        public async Task<User> CreateAsync(string name, string lastName,EUserType userType, Account.Account account)
+        
+
+        public Task<User> CreateAsync(string name, string lastName, EUserType userType)
         {
-            var dbAccount=await _accountRepository.FindByEmailAsync(account.Email);
-            if(dbAccount!=null)
-                throw new EmailException("User with given login already exists");
-            return new User(name,lastName,userType,account);
+            return System.Threading.Tasks.Task.Factory.StartNew(() => new User(name, lastName, userType));
         }
     }
 }

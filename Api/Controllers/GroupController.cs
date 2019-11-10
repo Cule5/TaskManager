@@ -27,15 +27,17 @@ namespace Api.Controllers
             _queryDispatcher = queryDispatcher;
             _groupService = groupService;
         }
-        //[Authorize(Policy = "CompanyAdmin")]
+        [Authorize(Policy = "CompanyAdmin")]
         [HttpPost]
         [Route("CreateGroup")]
         public async Task<IActionResult> CreateGroup([FromBody]CreateGroup command)
         {
+            var u = base.User.Identity.Name;
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
         }
 
+        [Authorize(Policy = "CompanyAdmin")]
         [HttpGet]
         [Route("AllGroups")]
         public async Task<IActionResult> AllGroups()

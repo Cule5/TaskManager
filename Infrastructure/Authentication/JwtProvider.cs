@@ -4,57 +4,58 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Core.Domain.Common;
+using Infrastructure.Extensions;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructure.Authentication
 {
     public class JwtProvider:IJwtProvider
     {
-        private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler = null;
-        private readonly JwtSettings _jwtSettings = null;
+        private readonly JwtSettings _jwtSettings;
+        private readonly SymmetricSecurityKey _issuerSigningKey;
+        private readonly SigningCredentials _signingCredentials;
+        private TokenValidationParameters _tokenValidationParameters;
 
         public JwtProvider(JwtSettings jwtSettings)
         {
             _jwtSettings = jwtSettings;
-            _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            _issuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
+            _signingCredentials = new SigningCredentials(_issuerSigningKey, SecurityAlgorithms.HmacSha256);
+            _tokenValidationParameters = new TokenValidationParameters
+            {
+                IssuerSigningKey = _issuerSigningKey,
+                ValidIssuer = _jwtSettings.Issuer,
+                ValidAudience = _jwtSettings.ValidAudience,
+                ValidateAudience = _jwtSettings.ValidateAudience,
+                ValidateLifetime = _jwtSettings.ValidateLifetime
+            };
         }
         public JsonWebToken CreateToken(int userId,EUserType userType)
         {
             var now = DateTime.UtcNow;
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var time = now.Subtract(new TimeSpan(epoch.Ticks));
-            var ticks=time.Ticks / 10000;
-
             var claims = new Claim[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
-                new Claim(ClaimTypes.Role, userType.ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
+                new Claim(ClaimTypes.Role,userType.ToString()), 
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, ticks.ToString(), ClaimValueTypes.Integer64)
+                new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString())
             };
 
-            var expiresTime = now.AddMinutes(_jwtSettings.ExpiryMinutes);
-            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)),
-                SecurityAlgorithms.HmacSha256);
+            var expires = now.AddMinutes(_jwtSettings.ExpiryMinutes);
             var jwt = new JwtSecurityToken(
                 issuer: _jwtSettings.Issuer,
                 claims: claims,
                 notBefore: now,
-                expires: expiresTime,
-                signingCredentials: signingCredentials
+                expires: expires,
+                signingCredentials: _signingCredentials
             );
-            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            var token = jwtSecurityTokenHandler.WriteToken(jwt);
-
-            
-            var epoch1 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var time1 = expiresTime.Subtract(new TimeSpan(epoch1.Ticks));
-            var ticks1 = time1.Ticks / 10000;
+            var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             return new JsonWebToken()
             {
                 Token = token,
-                Expires = ticks1
+                Expires = expires.ToTimestamp()
             };
         }
     }

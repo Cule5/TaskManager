@@ -21,6 +21,7 @@ namespace Services.User.Handlers
             {
                 Name = command.Name,
                 LastName = command.LastName,
+                Email = command.Email,
                 GroupName = command.GroupName,
                 Projects = command.Projects,
                 UserType=command.UserType

@@ -20,9 +20,8 @@ namespace Infrastructure.Repositories.Account
         {
             var dbAccount = await FindByEmailAsync(account.Email);
             if(dbAccount!=null)
-                throw new EmailException("User with given email already exists");
+               return;
             await _dbContext.AddAsync(account);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Core.Domain.Account.Account> FindAsync(string email,string password)

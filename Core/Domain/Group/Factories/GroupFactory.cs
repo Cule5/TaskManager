@@ -17,7 +17,9 @@ namespace Core.Domain.Group.Factories
         public async Task<Group> CreateAsync(string groupName)
         {
             var dbGroup=await _groupRepository.FindByName(groupName);
-            return dbGroup ?? new Group(groupName);
+            if(dbGroup!=null)
+                throw new GroupNameException("Group with given name already exist");
+            return new Group(groupName);
         }
     }
 }

@@ -22,7 +22,6 @@ namespace Infrastructure.Repositories.WorkItem
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.WorkItem.WorkItem workItem)
         {
             await _dbContext.AddAsync(workItem);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Core.Domain.WorkItem.WorkItem> FindAsync(Core.Domain.WorkItem.WorkItem workItem)

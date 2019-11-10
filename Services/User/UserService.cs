@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Net.Mail;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +14,13 @@ using Infrastructure.Authentication;
 using Services.Exceptions;
 using Services.User.Dtos;
 using System.Web;
+using Core.Domain.Common;
 using Core.Domain.Group.Repositories;
 using Core.Domain.Project.Repositories;
 using Core.Domain.ProjectUser.Factories;
 using Core.Domain.ProjectUser.Repositories;
+using Infrastructure.Email;
+using Infrastructure.UnitOfWork;
 
 namespace Services.User
 {
@@ -30,6 +35,8 @@ namespace Services.User
         private readonly IProjectRepository _projectRepository = null;
         private readonly IProjectUserRepository _projectUserRepository = null;
         private readonly IProjectUserFactory _projectUserFactory = null;
+        private readonly IUnitOfWork _unitOfWork = null;
+        private readonly IEmailSender _emailSender = null;
         public UserService(IUserRepository userRepository,
             IAccountRepository accountRepository,
             IUserFactory userFactory,
@@ -38,7 +45,9 @@ namespace Services.User
             IProjectRepository projectRepository,
             IGroupRepository groupRepository,
             IProjectUserRepository projectUserRepository,
-            IProjectUserFactory projectUserFactory)
+            IProjectUserFactory projectUserFactory,
+            IUnitOfWork unitOfWork,
+            IEmailSender emailSender)
         {
             _userRepository = userRepository;
             _accountRepository = accountRepository;
@@ -49,6 +58,8 @@ namespace Services.User
             _groupRepository = groupRepository;
             _projectUserRepository = projectUserRepository;
             _projectUserFactory = projectUserFactory;
+            _unitOfWork = unitOfWork;
+            _emailSender = emailSender;
         }
         public async System.Threading.Tasks.Task<JsonWebToken> Login(string login,string password)
         {
@@ -69,24 +80,39 @@ namespace Services.User
         public async System.Threading.Tasks.Task RegisterAsync(RegisterUserDto registerUserDto)
         {
             var newAccount = await _accountFactory.CreateAsync(registerUserDto.Email);
-            var newUser=await _userFactory.CreateAsync(registerUserDto.Name,registerUserDto.LastName,registerUserDto.UserType,newAccount);
-            var dbGroup=await _groupRepository.FindByName(registerUserDto.GroupName);
-            var projects = await _projectRepository.FindProjectsByNames(registerUserDto.Projects);
-            dbGroup.Users.Add(newUser);
-            foreach (var project in projects)
+            var dbGroup = await _groupRepository.FindByName(registerUserDto.GroupName);
+            var newUser=await _userFactory.CreateAsync(registerUserDto.Name,registerUserDto.LastName,registerUserDto.UserType);
+            newUser.Account = newAccount;
+            newUser.Group = dbGroup;
+            dbGroup?.Users.Add(newUser);
+            foreach (var project in registerUserDto.Projects)
             {
-                var newProjectUser = await _projectUserFactory.CreateAsync(project,newUser);
-                project.ProjectUsers.Add(newProjectUser);
-                newUser.ProjectUsers.Add(newProjectUser);
-                await _projectUserRepository.AddAsync(newProjectUser);
+                var dbProject = await _projectRepository.FindByNameAsync(project);
+                if (dbProject == null) continue;
+                var projectUser = await _projectUserFactory.CreateAsync(dbProject, newUser);
+                dbProject.ProjectUsers.Add(projectUser);
+                newUser.ProjectUsers.Add(projectUser);
+                await _projectUserRepository.AddAsync(projectUser);
             }
-            await _userRepository.AddAsync(newUser);
             await _accountRepository.AddAsync(newAccount);
+            await _userRepository.AddAsync(newUser);
+            await _unitOfWork.SaveAsync();
+            _emailSender.Send(newAccount.Email,newAccount.Password);
         }
 
         public async Task<IEnumerable<Core.Domain.User.User>> GetAllUsersAsync()
         {
             return await _userRepository.GetAllUsersAsync();
+        }
+
+        public Task<IEnumerable<string>> GetAllUsersTypeAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.StartNew<IEnumerable<string>>(() =>
+            {
+                var usersType = new List<string>() { EUserType.ProjectManager.ToString(), EUserType.Worker.ToString() };
+                return usersType;
+            });
+            
         }
     }
 }

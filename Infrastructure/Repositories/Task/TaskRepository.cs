@@ -23,7 +23,6 @@ namespace Infrastructure.Repositories.Task
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.Task.Task task)
         {
             await _dbContext.Tasks.AddAsync(task);
-            await _dbContext.SaveChangesAsync();
         }
 
     }

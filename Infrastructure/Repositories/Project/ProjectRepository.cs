@@ -27,9 +27,8 @@ namespace Infrastructure.Repositories.Project
         {
             var dbProject=await FindByNameAsync(project.ProjectName);
             if(dbProject!=null)
-                throw new ProjectNameException("Project with given name already exists in database");
+                return;
             await _dbContext.Projects.AddAsync(project);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Core.Domain.Project.Project> FindByNameAsync(string projectName)

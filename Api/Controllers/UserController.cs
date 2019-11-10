@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
+using Services.User;
 using Services.User.Command;
 using Services.User.Query;
 
@@ -14,16 +15,18 @@ using Services.User.Query;
 
 namespace Api.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     public class UserController : Controller
     {
         private readonly ICommandDispatcher _commandDispatcher = null;
         private readonly IQueryDispatcher _queryDispatcher = null;
-        public UserController(ICommandDispatcher commandDispatcher,IQueryDispatcher queryDispatcher)
+        private readonly IUserService _userService = null;
+        public UserController(ICommandDispatcher commandDispatcher,IQueryDispatcher queryDispatcher,IUserService userService)
         {
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
+            _userService = userService;
         }
 
         [Authorize(Policy = "CompanyAdmin")]
@@ -56,6 +59,15 @@ namespace Api.Controllers
         public async Task<IActionResult> LogoutAsync()
         {
             return Ok();
+        }
+
+
+        [Authorize(Policy = "CompanyAdmin")]
+        [HttpGet]
+        [Route("UsersTypes")]
+        public async Task<IActionResult> UsersTypes()
+        {
+            return Ok(await _userService.GetAllUsersTypeAsync());
         }
 
        

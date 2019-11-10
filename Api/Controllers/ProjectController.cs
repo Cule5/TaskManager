@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
@@ -12,6 +13,7 @@ using Services.Project.Command;
 
 namespace Api.Controllers
 {
+   
     [Route("api/[controller]")]
     public class ProjectController : Controller
     {
@@ -24,15 +26,17 @@ namespace Api.Controllers
             _queryDispatcher = queryDispatcher;
             _projectService = projectService;
         }
-        
+
+        [Authorize(Policy = "CompanyAdmin")]
         [HttpPost]
         [Route("CreateProject")]
-        public async Task<IActionResult> CreateProject([FromBody]CreateProject command)
+        public async Task<IActionResult> CreateProject([Microsoft.AspNetCore.Mvc.FromBody]CreateProject command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
         }
 
+        [Authorize(Policy = "CompanyAdmin")]
         [HttpGet]
         [Route("AllProjects")]
         public async Task<IActionResult> AllProjects()

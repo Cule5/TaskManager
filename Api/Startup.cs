@@ -50,13 +50,17 @@ public class Startup
                 {
                     ValidIssuer = "http://localhost:51524",
                     ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting.Key))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting.SecretKey))
                 };
                
             });
             services.AddAuthorization((configuration) =>
             {
-                configuration.AddPolicy("CompanyAdmin",r=>r.RequireRole(EUserType.CompanyAdmin.ToString()));
+                configuration.AddPolicy("CompanyAdmin",r=>
+                {
+                    r.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                    r.RequireRole(EUserType.CompanyAdmin.ToString());
+                });
             });
 
 

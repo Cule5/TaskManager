@@ -16,7 +16,6 @@ namespace Infrastructure.Repositories.ProjectUser
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.ProjectUser.ProjectUser projectUser)
         {
             await _appDbContext.ProjectUsers.AddAsync(projectUser);
-            await _appDbContext.SaveChangesAsync();
         }
     }
 }
