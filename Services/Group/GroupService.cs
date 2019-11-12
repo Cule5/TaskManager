@@ -31,15 +31,6 @@ namespace Services.Group
             
         }
 
-        public async Task<List<string>> AllGroups()
-        {
-            var groupsList = await _groupRepository.AllGroups();
-            var groupNameList=new List<string>();
-            foreach (var group in groupsList)
-            {
-                groupNameList.Add(group.GroupName);
-            }
-            return groupNameList;
-        }
+        
     }
 }

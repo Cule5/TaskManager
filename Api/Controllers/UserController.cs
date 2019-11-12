@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -17,7 +18,7 @@ namespace Api.Controllers
 {
     
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly ICommandDispatcher _commandDispatcher = null;
         private readonly IQueryDispatcher _queryDispatcher = null;
@@ -39,8 +40,8 @@ namespace Api.Controllers
         }
 
         [AllowAnonymous]
-        [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.Route("Login")]
+        [HttpPost]
+        [Route("Login")]
         public async Task<IActionResult> LoginUser([FromBody]LoginUser query)
         {
             try
@@ -67,9 +68,25 @@ namespace Api.Controllers
         [Route("UsersTypes")]
         public async Task<IActionResult> UsersTypes()
         {
-            return Ok(await _userService.GetAllUsersTypeAsync());
+            return Ok(await _queryDispatcher.DispatchAsync(new AllUsersTypes()));
         }
 
-       
+        [Authorize(Policy = "CompanyAdmin")]
+        [HttpPost]
+        [Route("FindUser")]
+        public async Task<IActionResult> FindUser([FromBody]FindUser query)
+        {
+            return Ok(await _queryDispatcher.DispatchAsync(query));
+        }
+
+
+        [HttpPost]
+        [Route("UserInfo{userId}")]
+        public async Task<IActionResult> UserInfo([FromBody]int userId)
+        {
+            return Ok();
+        }
+
+
     }
 }

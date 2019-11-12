@@ -8,6 +8,7 @@ using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
 using Services.Project;
 using Services.Project.Command;
+using Services.Project.Query;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,7 +16,7 @@ namespace Api.Controllers
 {
    
     [Route("api/[controller]")]
-    public class ProjectController : Controller
+    public class ProjectController : BaseController
     {
         private readonly ICommandDispatcher _commandDispatcher=null;
         private readonly IQueryDispatcher _queryDispatcher = null;
@@ -30,7 +31,7 @@ namespace Api.Controllers
         [Authorize(Policy = "CompanyAdmin")]
         [HttpPost]
         [Route("CreateProject")]
-        public async Task<IActionResult> CreateProject([Microsoft.AspNetCore.Mvc.FromBody]CreateProject command)
+        public async Task<IActionResult> CreateProject([FromBody]CreateProject command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
@@ -41,7 +42,14 @@ namespace Api.Controllers
         [Route("AllProjects")]
         public async Task<IActionResult> AllProjects()
         {
-            return Ok(await _projectService.AllProjectsAsync());
+            return Ok(await _queryDispatcher.DispatchAsync(new AllProjects()));
+        }
+
+        [HttpGet]
+        [Route("UsersProjects")]
+        public async Task<IActionResult> UsersProjects()
+        {
+            return Ok();
         }
 
 

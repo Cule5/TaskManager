@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Domain.Exceptions;
 using Core.Domain.Project.Repositories;
 
 namespace Core.Domain.Project.Factories
@@ -16,7 +17,9 @@ namespace Core.Domain.Project.Factories
         public async Task<Project> CreateAsync(string projectName,string description,DateTime startDate)
         {
             var dbProject=await _projectRepository.FindByNameAsync(projectName);
-            return dbProject ?? new Project(projectName, description, startDate);
+            if(dbProject!=null)
+                throw new ProjectNameException("Project with given name already exists");
+            return new Project(projectName, description, startDate);
         }
     }
 }

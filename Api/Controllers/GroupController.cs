@@ -9,6 +9,7 @@ using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
 using Services.Group;
 using Services.Group.Command;
+using Services.Group.Query;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,7 +17,7 @@ namespace Api.Controllers
 {
     
     [Route("api/[controller]")]
-    public class GroupController : Controller
+    public class GroupController : BaseController
     {
         private readonly ICommandDispatcher _commandDispatcher = null;
         private readonly IQueryDispatcher _queryDispatcher = null;
@@ -42,8 +43,10 @@ namespace Api.Controllers
         [Route("AllGroups")]
         public async Task<IActionResult> AllGroups()
         {
-            return Ok(await _groupService.AllGroups());
+            return Ok(await _queryDispatcher.DispatchAsync(new AllGroups()));
         }
+
+
        
     }
 }

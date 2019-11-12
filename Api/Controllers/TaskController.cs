@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
@@ -13,9 +13,9 @@ using Services.Task.Command;
 
 namespace Api.Controllers
 {
-    [Authorize]
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
-    public class TaskController : ApiController
+   
+    [Route("api/[controller]")]
+    public class TaskController : BaseController
     {
         private readonly ICommandDispatcher _commandDispatcher = null;
         private readonly IQueryDispatcher _queryDispatcher = null;
@@ -25,25 +25,18 @@ namespace Api.Controllers
             _queryDispatcher = queryDispatcher;
         }
         
-        [Microsoft.AspNetCore.Mvc.HttpGet]
-        [Microsoft.AspNetCore.Mvc.Route("")]
-        public async Task<IHttpActionResult> GetAvailablesUsers()
-        {
-            
-            return Ok();
-        }
-
-        [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.Route("CreateTask")]
-        public async Task<IHttpActionResult> CreateTask([Microsoft.AspNetCore.Mvc.FromBody]CreateTask command)
+        [Authorize(Policy = "ProjectManager")]
+        [HttpPost]
+        [Route("CreateTask")]
+        public async Task<IActionResult> CreateTask([FromBody]CreateTask command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.Route("CreateReport")]
-        public async Task<IHttpActionResult> CreateReport([System.Web.Http.FromBody]CreateReport command)
+        [HttpPost]
+        [Route("CreateReport")]
+        public async Task<IActionResult> CreateReport([Microsoft.AspNetCore.Mvc.FromBody]CreateReport command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();

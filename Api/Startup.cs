@@ -61,6 +61,12 @@ public class Startup
                     r.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
                     r.RequireRole(EUserType.CompanyAdmin.ToString());
                 });
+
+                configuration.AddPolicy("ProjectManager", r =>
+                {
+                    r.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                    r.RequireRole(EUserType.ProjectManager.ToString());
+                });
             });
 
 

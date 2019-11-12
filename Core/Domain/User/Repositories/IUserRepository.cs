@@ -9,7 +9,5 @@ namespace Core.Domain.User.Repositories
     {
         Task<User> GetAsync(int userId);
         System.Threading.Tasks.Task AddAsync(User user);
-        Task<User> FindAsync(string login,string password);
-        Task<IEnumerable<User>> GetAllUsersAsync();
     }
 }

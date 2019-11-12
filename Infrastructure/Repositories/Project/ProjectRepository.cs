@@ -36,10 +36,6 @@ namespace Infrastructure.Repositories.Project
             return await _dbContext.Projects.FirstOrDefaultAsync(p=>p.ProjectName.Equals(projectName));
         }
 
-        public async Task<IEnumerable<Core.Domain.Project.Project>> FindProjectsByNames(IEnumerable<string> projects)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<IEnumerable<string>> GetAllProjects()
         {
@@ -51,5 +47,7 @@ namespace Infrastructure.Repositories.Project
             });
             
         }
+
+        
     }
 }

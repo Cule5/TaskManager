@@ -28,9 +28,6 @@ namespace Services.Project
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<string>> AllProjectsAsync()
-        {
-            return await _projectRepository.GetAllProjects();
-        }
+        
     }
 }

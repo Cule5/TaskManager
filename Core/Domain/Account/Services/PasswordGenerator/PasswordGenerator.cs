@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Domain.Account.Services
+namespace Core.Domain.Account.Services.PasswordGenerator
 {
     public class PasswordGenerator:IPasswordGenerator
     {

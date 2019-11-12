@@ -8,7 +8,6 @@ namespace Services.Group
     {
         System.Threading.Tasks.Task CreateGroup(string groupName);
         System.Threading.Tasks.Task DeleteGroup(string groupName);
-        System.Threading.Tasks.Task<List<string>> AllGroups();
 
     }
 }

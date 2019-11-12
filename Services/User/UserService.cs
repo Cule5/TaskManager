@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Resources;
@@ -98,21 +99,6 @@ namespace Services.User
             await _userRepository.AddAsync(newUser);
             await _unitOfWork.SaveAsync();
             _emailSender.Send(newAccount.Email,newAccount.Password);
-        }
-
-        public async Task<IEnumerable<Core.Domain.User.User>> GetAllUsersAsync()
-        {
-            return await _userRepository.GetAllUsersAsync();
-        }
-
-        public Task<IEnumerable<string>> GetAllUsersTypeAsync()
-        {
-            return System.Threading.Tasks.Task.Factory.StartNew<IEnumerable<string>>(() =>
-            {
-                var usersType = new List<string>() { EUserType.ProjectManager.ToString(), EUserType.Worker.ToString() };
-                return usersType;
-            });
-            
         }
     }
 }

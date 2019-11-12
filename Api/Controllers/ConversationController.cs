@@ -14,7 +14,7 @@ namespace Api.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    public class MessagingController : Controller
+    public class MessagingController : BaseController
     {
         private readonly ICommandDispatcher _commandDispatcher = null;
         private readonly IQueryDispatcher _queryDispatcher = null;
@@ -23,6 +23,7 @@ namespace Api.Controllers
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
         }
+
         [HttpPost]
         [Route("SendMessage")]
         public async Task<IActionResult> SendMessageAsync([FromBody]SendMessage command)

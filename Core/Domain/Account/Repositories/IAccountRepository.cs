@@ -8,7 +8,7 @@ namespace Core.Domain.Account.Repositories
     public interface IAccountRepository
     {
         System.Threading.Tasks.Task AddAsync(Account account);
-        Task<Account> FindAsync(string login,string password);
-        Task<Account> FindByEmailAsync(string login);
+        Task<Account> FindAsync(string email,string password);
+        Task<Account> FindByEmailAsync(string email);
     }
 }

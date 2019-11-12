@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Domain.Account.Repositories;
-using Core.Domain.Account.Services;
+using Core.Domain.Account.Services.PasswordGenerator;
 using Core.Domain.Exceptions;
 
 namespace Core.Domain.Account.Factories

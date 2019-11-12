@@ -12,7 +12,5 @@ namespace Services.User
         System.Threading.Tasks.Task<JsonWebToken> Login(string login,string password);
         System.Threading.Tasks.Task LogoutAsync();
         System.Threading.Tasks.Task RegisterAsync(RegisterUserDto registerUserDto);
-        Task<IEnumerable<Core.Domain.User.User>> GetAllUsersAsync();
-        Task<IEnumerable<string>> GetAllUsersTypeAsync();
     }
 }
