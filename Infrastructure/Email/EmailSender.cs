@@ -11,7 +11,7 @@ namespace Infrastructure.Email
        
         public void Send(string email,string message)
         {
-            MailMessage mail = new MailMessage("dominikmura6@gmail.com",email);
+            MailMessage mail = new MailMessage("dominikmura9@gmail.com",email);
 
             SmtpClient smtp = new SmtpClient
             {
@@ -19,7 +19,7 @@ namespace Infrastructure.Email
                 Port = 587,
                 UseDefaultCredentials = false,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                Credentials = new NetworkCredential("dominikmura6@gmail.com", "Barcelonista5"),
+                Credentials = new NetworkCredential("dominikmura9@gmail.com", "adminadmin123"),
                 EnableSsl = true,
                 Timeout = 10000
             };

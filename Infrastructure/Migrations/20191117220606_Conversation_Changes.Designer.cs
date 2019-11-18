@@ -4,14 +4,16 @@ using Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191117220606_Conversation_Changes")]
+    partial class Conversation_Changes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,11 +50,15 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("SenderId");
 
+                    b.Property<int?>("UserId");
+
                     b.HasKey("ConversationId");
 
                     b.HasIndex("ReceiverId");
 
                     b.HasIndex("SenderId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Conversations");
                 });
@@ -175,14 +181,18 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Domain.Conversation.Conversation", b =>
                 {
                     b.HasOne("Core.Domain.User.User", "Receiver")
-                        .WithMany("ReceivedConversations")
+                        .WithMany()
                         .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Core.Domain.User.User", "Sender")
-                        .WithMany("SendedConversations")
+                        .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Core.Domain.User.User")
+                        .WithMany("Conversations")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Core.Domain.ProjectUser.ProjectUser", b =>

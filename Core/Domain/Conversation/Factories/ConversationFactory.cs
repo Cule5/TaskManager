@@ -7,9 +7,9 @@ namespace Core.Domain.Conversation.Factories
 {
     public class ConversationFactory:IConversationFactory
     {
-        public Task<Conversation> CreateAsync()
+        public Task<Conversation> CreateAsync(User.User receiver, User.User sender, string message)
         {
-            throw new NotImplementedException();
+            return System.Threading.Tasks.Task.Factory.StartNew(() => new Conversation(message,receiver,sender));
         }
     }
 }

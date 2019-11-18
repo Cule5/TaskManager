@@ -32,7 +32,8 @@ namespace Core.Domain.User
         public int AccountId { get; set; }
         public virtual Account.Account Account { get; set; }
         public virtual ICollection<Task.Task> Tasks { get; set; }=new List<Task.Task>();
-        public virtual ICollection<Conversation.Conversation> Conversations { get; set; }=new List<Conversation.Conversation>();
+        public virtual ICollection<Conversation.Conversation> SendedConversations { get; set; }=new List<Conversation.Conversation>();
+        public virtual ICollection<Conversation.Conversation> ReceivedConversations { get; set; }=new List<Conversation.Conversation>();
         public virtual ICollection<ProjectUser.ProjectUser> ProjectUsers { get; set; }=new List<ProjectUser.ProjectUser>();
         
         

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 using Services.Common.Query;
 using Services.User.Dtos;
 using Services.User.Query;
@@ -18,16 +19,11 @@ namespace Services.User.Handlers
             _dbContext = dbContext;
         }
 
-        public Task<IEnumerable<FindUserDto>> HandleAsync(FindUser query)
+        public async Task<IEnumerable<FindUserDto>> HandleAsync(FindUser query)
         {
-            //return System.Threading.Tasks.Task.Factory.StartNew<IEnumerable<FindUserDto>>(() =>
-            //{
-            //    var result=new List<FindUserDto>();
-                
-            //    var users=_dbContext.Users.Select(user=>)
-            //});
-            throw new NotImplementedException();
-
+            return await _dbContext.Users
+                .Where(user => user.Name.Equals(query.Name) && user.LastName.Equals(query.LastName))
+                .Select(user => new FindUserDto(user.UserId, user.Name, user.LastName,user.Account.Email)).ToListAsync();
         }
     }
 }

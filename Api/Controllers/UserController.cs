@@ -71,7 +71,6 @@ namespace Api.Controllers
             return Ok(await _queryDispatcher.DispatchAsync(new AllUsersTypes()));
         }
 
-        [Authorize(Policy = "CompanyAdmin")]
         [HttpPost]
         [Route("FindUser")]
         public async Task<IActionResult> FindUser([FromBody]FindUser query)
@@ -82,7 +81,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("UserInfo{userId}")]
-        public async Task<IActionResult> UserInfo([FromBody]int userId)
+        public async Task<IActionResult> UserInfo([FromRoute]int userId)
         {
             return Ok();
         }

@@ -12,9 +12,17 @@ namespace Core.Domain.Conversation
         {
 
         }
+        public Conversation(string message,User.User receiver,User.User sender)
+        {
+            Message = message;
+            Sender = sender;
+            Receiver = receiver;
+        }
         public int ConversationId { get; set; }
         public string Message { get; set; }
+        public int SenderId { get; set; }
         public virtual User.User Sender { get; set; }
+        public int ReceiverId { get; set; }
         public virtual User.User Receiver { get; set; }
         public EMessageStatus MessageStatus { get; set; }
     }

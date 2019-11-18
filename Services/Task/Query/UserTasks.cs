@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using Services.Common.Query;
-using Services.Project.Dtos;
+using Services.Task.Dtos;
 
-namespace Services.Project.Query
+namespace Services.Task.Query
 {
-    public class UserProjects:IQuery<IEnumerable<UserProjectsDto>>
+    public class UserTasks:IQuery<IEnumerable<UserTasksDto>>
     {
-        public UserProjects(int userId)
+        public UserTasks(int userId)
         {
             UserId = userId;
         }

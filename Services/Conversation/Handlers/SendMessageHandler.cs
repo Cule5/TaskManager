@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Services.Common.Command;
 using Services.Conversation.Command;
+using Services.Conversation.Dtos;
 
 namespace Services.Conversation.Handlers
 {
@@ -15,7 +16,7 @@ namespace Services.Conversation.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(SendMessage command)
         {
-            await _conversationService.SendMessageAsync();
+            await _conversationService.SendMessageAsync(new SendMessageDto(command.SenderId,command.ReceiverId,command.Message));
         }
     }
 }

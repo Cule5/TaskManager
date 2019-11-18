@@ -8,6 +8,12 @@ namespace Api.Controllers
 {
     public class BaseController:Controller
     {
-        protected int UserId => Convert.ToInt32(User.Identity.Name);
+        protected int UserId
+        {
+            get
+            {
+                return Convert.ToInt32(User.Identity.Name);
+            }
+        }
     }
 }

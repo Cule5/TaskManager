@@ -6,7 +6,12 @@ namespace Services.Project.Dtos
 {
     public class UserProjectsDto
     {
-        public int ProjectId { get; set; }
-        public string ProjectName { get; set; }
+        public UserProjectsDto(int projectId,string projectName)
+        {
+            ProjectId = projectId;
+            ProjectName = projectName;
+        }
+        public int ProjectId { get;}
+        public string ProjectName { get;}
     }
 }

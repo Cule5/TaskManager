@@ -93,22 +93,14 @@ namespace Infrastructure.EntityFramework
             //    .HasForeignKey(c => c.SenderId)
             //    .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<Conversation>(entity =>
-            {
-                entity.HasOne(c => c.Receiver)
-                    .WithMany()
-
-                    .OnDelete(DeleteBehavior.Restrict);
-
-
-                entity.HasOne(c => c.Sender)
-                    .WithMany()
-                    
-                    .OnDelete(DeleteBehavior.Restrict);
-
-
-            });
-
+            modelBuilder.Entity<User>().HasMany(u => u.ReceivedConversations)
+                .WithOne(c => c.Receiver)
+                .HasForeignKey(c=>c.ReceiverId);
+                
+            modelBuilder.Entity<User>().HasMany(u=>u.SendedConversations)
+                .WithOne(c=>c.Sender)
+                .HasForeignKey(c=>c.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
 

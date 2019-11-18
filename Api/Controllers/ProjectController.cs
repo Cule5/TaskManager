@@ -46,10 +46,10 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("UsersProjects")]
+        [Route("UserProjects/{userId}")]
         public async Task<IActionResult> UsersProjects()
         {
-            return Ok();
+            return Ok(await _queryDispatcher.DispatchAsync(new UserProjects(UserId)));
         }
 
 

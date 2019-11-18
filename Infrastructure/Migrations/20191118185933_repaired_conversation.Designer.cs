@@ -4,14 +4,16 @@ using Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191118185933_repaired_conversation")]
+    partial class repaired_conversation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,15 +46,15 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("MessageStatus");
 
-                    b.Property<int>("ReceiverId");
+                    b.Property<int?>("ReceiverUserId");
 
-                    b.Property<int>("SenderId");
+                    b.Property<int?>("SenderUserId");
 
                     b.HasKey("ConversationId");
 
-                    b.HasIndex("ReceiverId");
+                    b.HasIndex("ReceiverUserId");
 
-                    b.HasIndex("SenderId");
+                    b.HasIndex("SenderUserId");
 
                     b.ToTable("Conversations");
                 });
@@ -176,12 +178,11 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Core.Domain.User.User", "Receiver")
                         .WithMany("ReceivedConversations")
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ReceiverUserId");
 
                     b.HasOne("Core.Domain.User.User", "Sender")
                         .WithMany("SendedConversations")
-                        .HasForeignKey("SenderId")
+                        .HasForeignKey("SenderUserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

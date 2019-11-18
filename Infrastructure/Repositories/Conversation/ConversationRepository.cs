@@ -13,9 +13,10 @@ namespace Infrastructure.Repositories.Conversation
         {
             _dbContext = dbContext;
         }
-        public System.Threading.Tasks.Task AddAsync(Core.Domain.Conversation.Conversation conversation)
+        public async System.Threading.Tasks.Task AddAsync(Core.Domain.Conversation.Conversation conversation)
         {
-            throw new NotImplementedException();
+            _dbContext.Conversations.Add(conversation);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

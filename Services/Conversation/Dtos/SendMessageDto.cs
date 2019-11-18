@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Services.Common.Command;
 
-namespace Services.Conversation.Command
+namespace Services.Conversation.Dtos
 {
-    public class SendMessage:ICommand
+    public class SendMessageDto
     {
-        public SendMessage()
+        public SendMessageDto(int senderId,int receiverId,string message)
         {
-
-        }
-        public SendMessage(int receiverId,string message)
-        {
+            SenderId = senderId;
             ReceiverId = receiverId;
             Message = message;
         }
