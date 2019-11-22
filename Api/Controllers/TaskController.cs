@@ -50,6 +50,29 @@ namespace Api.Controllers
             return Ok(await _queryDispatcher.DispatchAsync(new UserTasks(UserId)));
         }
 
+        [HttpGet]
+        [Route("UserAvailableTasks")]
+        public async Task<IActionResult> UserAvailableTasks()
+        {
+            return Ok();
+        }
+
+        [Authorize(Policy = "ProjectManager")]
+        [HttpGet]
+        [Route("TasksPriorities")]
+        public async Task<IActionResult> TasksPriorities()
+        {
+            return Ok( await _queryDispatcher.DispatchAsync(new TasksPriorities()));
+        }
+
+        [Authorize(Policy = "ProjectManager")]
+        [HttpGet]
+        [Route("TasksTypes")]
+        public async Task<IActionResult> TasksTypes()
+        {
+            return Ok(await _queryDispatcher.DispatchAsync(new TasksTypes()));
+        }
+
 
     }
 }

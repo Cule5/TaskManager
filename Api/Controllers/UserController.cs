@@ -86,6 +86,13 @@ namespace Api.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("ProjectsManagers")]
+        public async Task<IActionResult> ProjectsManagers()
+        {
+            return Ok();
+        }
+
 
     }
 }

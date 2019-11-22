@@ -8,6 +8,6 @@ namespace Core.Domain.Task.Factories
 {
     public interface ITaskFactory
     {
-        Task<Task> CreateAsync(string description,ETaskPriority taskPriority,DateTime startDate,DateTime endDate);
+        Task<Task> CreateAsync(string description,ETaskPriority taskPriority,ETaskType taskType,DateTime startDate,DateTime endDate);
     }
 }

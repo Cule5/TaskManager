@@ -11,7 +11,7 @@ using Services.User.Query;
 
 namespace Services.User.Handlers
 {
-    public class FindUserHandler:IQueryHandler<FindUser,IEnumerable<FindUserDto>>
+    public class FindUserHandler:IQueryHandler<FindUser,IEnumerable<CommonUserDto>>
     {
         private readonly AppDbContext _dbContext = null;
         public FindUserHandler(AppDbContext dbContext)
@@ -19,11 +19,11 @@ namespace Services.User.Handlers
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<FindUserDto>> HandleAsync(FindUser query)
+        public async Task<IEnumerable<CommonUserDto>> HandleAsync(FindUser query)
         {
             return await _dbContext.Users
                 .Where(user => user.Name.Equals(query.Name) && user.LastName.Equals(query.LastName))
-                .Select(user => new FindUserDto(user.UserId, user.Name, user.LastName,user.Account.Email)).ToListAsync();
+                .Select(user => new CommonUserDto(user.UserId, user.Name, user.LastName,user.Account.Email)).ToListAsync();
         }
     }
 }

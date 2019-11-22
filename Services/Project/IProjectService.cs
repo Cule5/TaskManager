@@ -8,6 +8,6 @@ namespace Services.Project
 {
     public interface IProjectService
     {
-        System.Threading.Tasks.Task CreateProjectAsync(CreateProjectDto createProjectDto);
+        System.Threading.Tasks.Task CreateProjectAsync(CommonProjectDto commonProjectDto);
     }
 }

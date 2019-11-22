@@ -6,9 +6,8 @@ using Services.User.Dtos;
 
 namespace Services.User.Query
 {
-    public class FindUser:IQuery<IEnumerable<CommonUserDto>>
+    public class ProjectsManagers:IQuery<IEnumerable<CommonUserDto>>
     {
-        public string Name { get; set; }
-        public string LastName { get; set; }
+
     }
 }

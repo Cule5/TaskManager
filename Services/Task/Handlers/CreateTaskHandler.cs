@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Services.Common.Command;
 using Services.Task.Command;
+using Services.Task.Dtos;
 
 namespace Services.Task.Handlers
 {
@@ -15,7 +16,7 @@ namespace Services.Task.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(CreateTask command)
         {
-            await _taskService.CreateTaskAsync();
+            await _taskService.CreateTaskAsync(new CreateTaskDto(command.Description,command.TaskPriority,command.TaskType,command.StartDate,command.EndDate));
         }
     }
 }

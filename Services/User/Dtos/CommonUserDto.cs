@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Services.User.Dtos
 {
-    public class FindUserDto
+    public class CommonUserDto
     {
-        public FindUserDto(int userId,string name,string lastName,string email)
+        public CommonUserDto(int userId,string name,string lastName,string email)
         {
             UserId = userId;
             Name = name;

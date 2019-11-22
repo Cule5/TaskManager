@@ -6,6 +6,7 @@ namespace Core.Domain.Common
 {
     public enum ETaskType
     {
-        Testing
+        Testing,
+        Development
     }
 }

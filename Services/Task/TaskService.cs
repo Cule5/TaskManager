@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Domain.Task.Factories;
 using Core.Domain.Task.Repositories;
+using Services.Task.Dtos;
 
 namespace Services.Task
 {
@@ -15,10 +16,10 @@ namespace Services.Task
             _taskRepository = taskRepository;
             _taskFactory = taskFactory;
         }
-        public async System.Threading.Tasks.Task CreateTaskAsync()
+        public async System.Threading.Tasks.Task CreateTaskAsync(CreateTaskDto createTaskDto)
         {
-            
-            throw new NotImplementedException();
+            var task = await _taskFactory.CreateAsync(createTaskDto.Description,createTaskDto.TaskPriority,createTaskDto.TaskType,createTaskDto.StartDate,createTaskDto.EndDate);
+            await _taskRepository.AddAsync(task);
         }
 
         public System.Threading.Tasks.Task DeleteTaskAsync()
