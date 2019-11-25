@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Report
+namespace Services.Task.Query
 {
-    public interface IReportService
+    class AvailableTasks
     {
     }
 }

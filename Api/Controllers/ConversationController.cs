@@ -25,7 +25,7 @@ namespace Api.Controllers
             _queryDispatcher = queryDispatcher;
         }
 
-        [Authorize(Policy = "CompanyAdmin")]
+        [Authorize(Policy = "Common")]
         [HttpPost]
         [Route("SendMessage")]
         public async Task<IActionResult> SendMessageAsync([FromBody]SendMessage command)
@@ -35,6 +35,7 @@ namespace Api.Controllers
             return Ok();
         }
 
+        [Authorize(Policy = "Common")]
         [HttpGet]
         [Route("UserMessages")]
         public async Task<IActionResult> UserMessages()

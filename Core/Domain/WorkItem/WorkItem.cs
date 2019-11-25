@@ -10,7 +10,7 @@ namespace Core.Domain.WorkItem
         {
 
         }
-        public WorkItem(string comment,double time,DateTime reportDate)
+        public WorkItem(string comment,double time,DateTime reportDate,Task.Task task)
         {
             Comment = comment;
             Time = time;

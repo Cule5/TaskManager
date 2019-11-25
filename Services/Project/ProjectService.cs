@@ -37,8 +37,7 @@ namespace Services.Project
             foreach (var user in commonProjectDto.Users)
             {
                 var dbUser=await _userRepository.GetAsync(user.UserId);
-                if (dbUser == null)
-                    throw new Exception("Project manager does not exists");
+                if (dbUser == null) continue;
                 var newProjectUser = await _projectUserFactory.CreateAsync(newProject, dbUser);
                 dbUser.ProjectUsers.Add(newProjectUser);
                 newProject.ProjectUsers.Add(newProjectUser);

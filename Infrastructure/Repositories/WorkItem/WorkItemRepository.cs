@@ -23,10 +23,5 @@ namespace Infrastructure.Repositories.WorkItem
         {
             await _dbContext.AddAsync(workItem);
         }
-
-        public async Task<Core.Domain.WorkItem.WorkItem> FindAsync(Core.Domain.WorkItem.WorkItem workItem)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

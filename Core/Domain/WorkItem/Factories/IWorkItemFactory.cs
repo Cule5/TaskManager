@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Core.Domain.WorkItem.Factories
 {
-    public interface IReportFactory
+    public interface IWorkItemFactory
     {
-        Task<WorkItem> CreateAsync(string comment,double time,DateTime reportDate);
+        Task<WorkItem> CreateAsync(string comment,double time,DateTime reportDate,Task.Task task);
     }
 }

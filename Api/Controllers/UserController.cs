@@ -44,15 +44,7 @@ namespace Api.Controllers
         [Route("Login")]
         public async Task<IActionResult> LoginUser([FromBody]LoginUser query)
         {
-            try
-            {
-                return Ok(await _queryDispatcher.DispatchAsync(query));
-            }
-            catch (Exception ex)
-            {
-                return Ok();
-            }
-
+            return Ok(await _queryDispatcher.DispatchAsync(query));
         }
         
         [HttpPut]
@@ -78,19 +70,20 @@ namespace Api.Controllers
             return Ok(await _queryDispatcher.DispatchAsync(query));
         }
 
-
+        [Authorize(Policy = "CompanyAdmin")]
         [HttpPost]
-        [Route("UserInfo{userId}")]
+        [Route("UserInfo")]
         public async Task<IActionResult> UserInfo([FromRoute]int userId)
         {
-            return Ok();
+            return Ok(new UserInfo(userId));
         }
 
+        [Authorize(Policy = "CompanyAdmin")]
         [HttpGet]
-        [Route("ProjectsManagers")]
-        public async Task<IActionResult> ProjectsManagers()
+        [Route("UsersWithoutGroup")]
+        public async Task<IActionResult> UsersWithoutGroup()
         {
-            return Ok();
+            return Ok(await _queryDispatcher.DispatchAsync(new UsersWithoutGroup()));
         }
 
 

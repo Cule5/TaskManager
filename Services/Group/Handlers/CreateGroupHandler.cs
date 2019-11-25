@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Services.Common.Command;
 using Services.Group.Command;
+using Services.Group.Dtos;
 
 namespace Services.Group.Handlers
 {
@@ -15,7 +16,7 @@ namespace Services.Group.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(CreateGroup command)
         {
-            await _groupService.CreateGroup(command.GroupName);
+            await _groupService.CreateGroupAsync(new CommonGroupDto(command.GroupName,command.Users));
         }
     }
 }

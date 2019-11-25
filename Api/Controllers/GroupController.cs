@@ -33,7 +33,6 @@ namespace Api.Controllers
         [Route("CreateGroup")]
         public async Task<IActionResult> CreateGroup([FromBody]CreateGroup command)
         {
-            var u = base.User.Identity.Name;
             await _commandDispatcher.DispatchAsync(command);
             return Ok();
         }

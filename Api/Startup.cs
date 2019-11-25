@@ -67,6 +67,17 @@ public class Startup
                     r.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
                     r.RequireRole(EUserType.ProjectManager.ToString());
                 });
+                configuration.AddPolicy("Worker", r =>
+                {
+                    r.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                    r.RequireRole(EUserType.Worker.ToString());
+                });
+                configuration.AddPolicy("Common", r =>
+                {
+                    r.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                    r.RequireRole(EUserType.CompanyAdmin.ToString(),EUserType.ProjectManager.ToString(),EUserType.Worker.ToString());
+                });
+
             });
 
 

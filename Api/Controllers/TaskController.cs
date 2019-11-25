@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
-using Services.Report.Command;
+using Services.WorkItem.Command;
 using Services.Task.Command;
 using Services.Task.Query;
 
@@ -30,14 +30,6 @@ namespace Api.Controllers
         [HttpPost]
         [Route("CreateTask")]
         public async Task<IActionResult> CreateTask([FromBody]CreateTask command)
-        {
-            await _commandDispatcher.DispatchAsync(command);
-            return Ok();
-        }
-
-        [HttpPost]
-        [Route("CreateReport")]
-        public async Task<IActionResult> CreateReport([FromBody]CreateReport command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();

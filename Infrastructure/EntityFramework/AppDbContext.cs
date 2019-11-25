@@ -4,7 +4,6 @@ using System.Text;
 using Core.Domain.Account;
 using Core.Domain.Conversation;
 using Core.Domain.Group;
-using Core.Domain.GroupProject;
 using Core.Domain.Project;
 using Core.Domain.ProjectUser;
 using Core.Domain.WorkItem;

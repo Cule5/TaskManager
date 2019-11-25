@@ -86,7 +86,8 @@ namespace Services.User
             newUser.Account = newAccount;
             newUser.Group = dbGroup;
             dbGroup?.Users.Add(newUser);
-            foreach (var project in registerUserDto.Projects)
+
+            foreach (var project in registerUserDto.Projects ?? Enumerable.Empty<string>())
             {
                 var dbProject = await _projectRepository.FindByNameAsync(project);
                 if (dbProject == null) continue;
@@ -100,5 +101,6 @@ namespace Services.User
             await _unitOfWork.SaveAsync();
             _emailSender.Send(newAccount.Email,newAccount.Password);
         }
+
     }
 }
