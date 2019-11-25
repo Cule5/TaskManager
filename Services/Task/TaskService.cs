@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Domain.Task.Factories;
 using Core.Domain.Task.Repositories;
+using Core.Domain.User.Repositories;
 using Infrastructure.UnitOfWork;
 using Services.Task.Dtos;
 
@@ -11,11 +12,13 @@ namespace Services.Task
     public class TaskService:ITaskService
     {
         private readonly ITaskRepository _taskRepository = null;
+        private readonly IUserRepository _userRepository = null;
         private readonly ITaskFactory _taskFactory = null;
         private readonly IUnitOfWork _unitOfWork = null;
-        public TaskService(ITaskRepository taskRepository,ITaskFactory taskFactory,IUnitOfWork unitOfWork)
+        public TaskService(ITaskRepository taskRepository,IUserRepository userRepository,ITaskFactory taskFactory,IUnitOfWork unitOfWork)
         {
             _taskRepository = taskRepository;
+            _userRepository = userRepository;
             _taskFactory = taskFactory;
             _unitOfWork = unitOfWork;
         }
@@ -23,6 +26,16 @@ namespace Services.Task
         {
             var task = await _taskFactory.CreateAsync(createTaskDto.Description,createTaskDto.TaskPriority,createTaskDto.TaskType,createTaskDto.StartDate,createTaskDto.EndDate);
             await _taskRepository.AddAsync(task);
+            await _unitOfWork.SaveAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetTaskToUserAsync(int userId, int taskId)
+        {
+            var user = await _userRepository.GetAsync(userId);
+            var task = await _taskRepository.GetAsync(taskId);
+            user.Tasks.Add(task);
+            task.User = user;
+            task.RealStartDate=DateTime.Now;
             await _unitOfWork.SaveAsync();
         }
 

@@ -11,18 +11,18 @@ using Services.Task.Query;
 
 namespace Services.Task.Handlers
 {
-    public class UserTasksHandler:IQueryHandler<UserTasks,IEnumerable<UserTasksDto>>
+    public class UserTasksHandler:IQueryHandler<UserTasks,IEnumerable<CommonTaskDto>>
     {
         private readonly AppDbContext _dbContext;
         public UserTasksHandler(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public async Task<IEnumerable<UserTasksDto>> HandleAsync(UserTasks query)
+        public async Task<IEnumerable<CommonTaskDto>> HandleAsync(UserTasks query)
         {
             return await _dbContext.Tasks
-                .Where(task => task.User.UserId == query.UserId)
-                .Select(task => new UserTasksDto())
+                .Where(task => task.User!=null&&task.User.UserId==query.UserId)
+                .Select(task => new CommonTaskDto(task.TaskId,task.Description,task.TaskPriority,task.EndDate,task.WorkItems.Sum(workItem=>workItem.Time)))
                 .ToListAsync();
         }
     }

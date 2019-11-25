@@ -6,7 +6,7 @@ using Services.Task.Dtos;
 
 namespace Services.Task.Query
 {
-    public class UserTasks:IQuery<IEnumerable<UserTasksDto>>
+    public class UserTasks:IQuery<IEnumerable<CommonTaskDto>>
     {
         public UserTasks(int userId)
         {

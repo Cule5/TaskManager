@@ -35,6 +35,7 @@ namespace Api.Controllers
             return Ok();
         }
 
+        [Authorize(Policy = "Worker")]
         [HttpGet]
         [Route("UserTasks")]
         public async Task<IActionResult> UserTasks()
@@ -42,11 +43,12 @@ namespace Api.Controllers
             return Ok(await _queryDispatcher.DispatchAsync(new UserTasks(UserId)));
         }
 
+        [Authorize(Policy = "Worker")]
         [HttpGet]
-        [Route("UserAvailableTasks")]
-        public async Task<IActionResult> UserAvailableTasks()
+        [Route("AvailableTasks")]
+        public async Task<IActionResult> AvailableTasks()
         {
-            return Ok();
+            return Ok(await _queryDispatcher.DispatchAsync(new AvailableTasks(UserId)));
         }
 
         [Authorize(Policy = "ProjectManager")]
@@ -63,6 +65,15 @@ namespace Api.Controllers
         public async Task<IActionResult> TasksTypes()
         {
             return Ok(await _queryDispatcher.DispatchAsync(new TasksTypes()));
+        }
+
+        [Authorize(Policy = "Worker")]
+        [HttpPost]
+        [Route("SetTaskToUser")]
+        public async Task<IActionResult> SetTaskToUser([FromBody]int taskId)
+        {
+            await _commandDispatcher.DispatchAsync(new SetTaskToUser(UserId, taskId));
+            return Ok();
         }
 
 
