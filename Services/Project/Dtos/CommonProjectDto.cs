@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Services.User.Dtos;
 
 namespace Services.Project.Dtos
 {
     public class CommonProjectDto
     {
-        public CommonProjectDto(string projectName,string description,DateTime startDate, IEnumerable<CommonUserDto>users)
+        public CommonProjectDto(int projectId,string projectName)
         {
+            ProjectId = projectId;
             ProjectName = projectName;
-            Description = description;
-            StartDate = startDate;
-            Users = users;
         }
-        public string ProjectName { get;  }
-        public string Description { get; }
-        public DateTime StartDate { get; }
-        public IEnumerable<CommonUserDto> Users { get; }
+        public int ProjectId { get;}
+        public string ProjectName { get;}
     }
 }

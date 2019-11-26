@@ -16,7 +16,7 @@ namespace Services.Group.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(CreateGroup command)
         {
-            await _groupService.CreateGroupAsync(new CommonGroupDto(command.GroupName,command.Users));
+            await _groupService.CreateGroupAsync(new CreateGroupDto(command.GroupName,command.Users));
         }
     }
 }

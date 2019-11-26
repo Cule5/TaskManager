@@ -21,6 +21,7 @@ namespace Core.Domain.Project
         public string ProjectName { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
+        public virtual ICollection<Task.Task> Tasks { get; set; }=new List<Task.Task>();
         public virtual ICollection<ProjectUser.ProjectUser> ProjectUsers { get; set; }
        
     }

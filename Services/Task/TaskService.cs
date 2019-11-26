@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Domain.Project.Repositories;
 using Core.Domain.Task.Factories;
 using Core.Domain.Task.Repositories;
 using Core.Domain.User.Repositories;
@@ -13,18 +14,23 @@ namespace Services.Task
     {
         private readonly ITaskRepository _taskRepository = null;
         private readonly IUserRepository _userRepository = null;
+        private readonly IProjectRepository _projectRepository = null;
         private readonly ITaskFactory _taskFactory = null;
         private readonly IUnitOfWork _unitOfWork = null;
-        public TaskService(ITaskRepository taskRepository,IUserRepository userRepository,ITaskFactory taskFactory,IUnitOfWork unitOfWork)
+        public TaskService(ITaskRepository taskRepository,IUserRepository userRepository,IProjectRepository projectRepository,ITaskFactory taskFactory,IUnitOfWork unitOfWork)
         {
             _taskRepository = taskRepository;
             _userRepository = userRepository;
+            _projectRepository = projectRepository;
             _taskFactory = taskFactory;
             _unitOfWork = unitOfWork;
         }
         public async System.Threading.Tasks.Task CreateTaskAsync(CreateTaskDto createTaskDto)
         {
-            var task = await _taskFactory.CreateAsync(createTaskDto.Description,createTaskDto.TaskPriority,createTaskDto.TaskType,createTaskDto.StartDate,createTaskDto.EndDate);
+            var dbProject=await _projectRepository.GetAsync(createTaskDto.ProjectId);
+            if(dbProject==null)
+                throw new Exception("Given project does not exists");
+            var task = await _taskFactory.CreateAsync(createTaskDto.Description,createTaskDto.TaskPriority,createTaskDto.TaskType,createTaskDto.StartDate,createTaskDto.EndDate,dbProject);
             await _taskRepository.AddAsync(task);
             await _unitOfWork.SaveAsync();
         }

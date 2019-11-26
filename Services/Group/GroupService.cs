@@ -25,10 +25,10 @@ namespace Services.Group
             _groupFactory = groupFactory;
             _unitOfWork = unitOfWork;
         }
-        public async System.Threading.Tasks.Task CreateGroupAsync(CommonGroupDto commonGroupDto)
+        public async System.Threading.Tasks.Task CreateGroupAsync(CreateGroupDto createGroupDto)
         {
-            var newGroup=await _groupFactory.CreateAsync(commonGroupDto.GroupName);
-            foreach (var user in commonGroupDto.Users?? Enumerable.Empty<CommonUserDto>())
+            var newGroup=await _groupFactory.CreateAsync(createGroupDto.GroupName);
+            foreach (var user in createGroupDto.Users?? Enumerable.Empty<CommonUserDto>())
             {
                 var dbUser = await _userRepository.GetAsync(user.UserId);
                 if(dbUser==null)

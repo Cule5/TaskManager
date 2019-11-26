@@ -17,15 +17,7 @@ namespace Services.User.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(RegisterUser command)
         {
-            var registerUserDto=new RegisterUserDto()
-            {
-                Name = command.Name,
-                LastName = command.LastName,
-                Email = command.Email,
-                GroupName = command.GroupName,
-                Projects = command.Projects,
-                UserType=command.UserType
-            };
+            var registerUserDto = new RegisterUserDto(command.Name,command.LastName,command.Email,command.GroupId,command.Projects,command.UserType);
             await _userService.RegisterAsync(registerUserDto);
         }
     }

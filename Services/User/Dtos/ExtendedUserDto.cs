@@ -8,7 +8,7 @@ namespace Services.User.Dtos
 {
     public class ExtendedUserDto
     {
-        public ExtendedUserDto(string name,string lastName,string email,CommonGroupDto group,IEnumerable<CommonProjectDto>projects)
+        public ExtendedUserDto(string name,string lastName,string email,CommonGroupDto group,IEnumerable<CreateProjectDto>projects)
         {
             Name = name;
             LastName = lastName;
@@ -20,6 +20,6 @@ namespace Services.User.Dtos
         public string LastName { get; }
         public string Email { get; }
         public CommonGroupDto Group { get; }
-        public IEnumerable<CommonProjectDto> Projects { get; }
+        public IEnumerable<CreateProjectDto> Projects { get; }
     }
 }

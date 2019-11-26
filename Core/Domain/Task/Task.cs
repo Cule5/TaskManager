@@ -13,13 +13,14 @@ namespace Core.Domain.Task
         {
 
         }
-        public Task(string description,ETaskPriority taskPriority,ETaskType taskType,DateTime startDate,DateTime endDate)
+        public Task(string description,ETaskPriority taskPriority,ETaskType taskType,DateTime startDate,DateTime endDate,Project.Project project)
         {
             Description = description;
             TaskPriority = taskPriority;
             TaskType = taskType;
             StartDate = startDate;
             EndDate = endDate;
+            Project = project;
         }
         public int TaskId { get; set; }
         public string Description { get; set; }
@@ -30,6 +31,7 @@ namespace Core.Domain.Task
         public DateTime RealStartDate { get; set; }
         public DateTime RealEndDate { get; set; }
         public virtual User.User User { get; set; }
+        public virtual Project.Project Project { get; set; }
         public virtual ICollection<WorkItem.WorkItem> WorkItems { get; set; }
         
     }

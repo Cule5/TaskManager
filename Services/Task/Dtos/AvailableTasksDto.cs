@@ -5,22 +5,19 @@ using Core.Domain.Common;
 
 namespace Services.Task.Dtos
 {
-    public class CreateTaskDto
+    public class AvailableTasksDto
     {
-        public CreateTaskDto(string description,ETaskPriority taskPriority,ETaskType taskType,DateTime startDate,DateTime endDate,int projectId)
+        public AvailableTasksDto(int taskId,string description,ETaskPriority taskPriority,DateTime endDate)
         {
+            TaskId = taskId;
             Description = description;
             TaskPriority = taskPriority;
-            TaskType = taskType;
-            StartDate = startDate;
             EndDate = endDate;
-            ProjectId = projectId;
         }
+        public int TaskId { get; }
         public string Description { get; }
         public ETaskPriority TaskPriority { get; }
-        public ETaskType TaskType { get; }
-        public DateTime StartDate { get; }
         public DateTime EndDate { get; }
-        public int ProjectId { get; }
+
     }
 }

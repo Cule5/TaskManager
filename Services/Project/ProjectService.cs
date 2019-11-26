@@ -31,10 +31,10 @@ namespace Services.Project
             _projectUserFactory = projectUserFactory;
             _unitOfWork = unitOfWork;
         }
-        public async System.Threading.Tasks.Task CreateProjectAsync(CommonProjectDto commonProjectDto)
+        public async System.Threading.Tasks.Task CreateProjectAsync(CreateProjectDto createProjectDto)
         {
-            var newProject = await _projectFactory.CreateAsync(commonProjectDto.ProjectName, commonProjectDto.Description, commonProjectDto.StartDate);
-            foreach (var user in commonProjectDto.Users)
+            var newProject = await _projectFactory.CreateAsync(createProjectDto.ProjectName, createProjectDto.Description, createProjectDto.StartDate);
+            foreach (var user in createProjectDto.Users)
             {
                 var dbUser=await _userRepository.GetAsync(user.UserId);
                 if (dbUser == null) continue;

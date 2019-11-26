@@ -45,8 +45,9 @@ namespace Api.Controllers
             return Ok(await _queryDispatcher.DispatchAsync(new AllProjects()));
         }
 
+        [Authorize(Policy = "ProjectManager")]
         [HttpGet]
-        [Route("UserProjects/{userId}")]
+        [Route("UserProjects")]
         public async Task<IActionResult> UsersProjects()
         {
             return Ok(await _queryDispatcher.DispatchAsync(new UserProjects(UserId)));

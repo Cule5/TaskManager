@@ -6,7 +6,7 @@ using Services.Project.Dtos;
 
 namespace Services.Project.Query
 {
-    public class UserProjects:IQuery<IEnumerable<UserProjectsDto>>
+    public class UserProjects:IQuery<IEnumerable<CommonProjectDto>>
     {
         public UserProjects(int userId)
         {

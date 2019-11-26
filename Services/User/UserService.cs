@@ -22,6 +22,7 @@ using Core.Domain.ProjectUser.Factories;
 using Core.Domain.ProjectUser.Repositories;
 using Infrastructure.Email;
 using Infrastructure.UnitOfWork;
+using Services.Project.Dtos;
 
 namespace Services.User
 {
@@ -81,15 +82,15 @@ namespace Services.User
         public async System.Threading.Tasks.Task RegisterAsync(RegisterUserDto registerUserDto)
         {
             var newAccount = await _accountFactory.CreateAsync(registerUserDto.Email);
-            var dbGroup = await _groupRepository.FindByName(registerUserDto.GroupName);
+            var dbGroup = await _groupRepository.GetAsync(registerUserDto.GroupId);
             var newUser=await _userFactory.CreateAsync(registerUserDto.Name,registerUserDto.LastName,registerUserDto.UserType);
             newUser.Account = newAccount;
             newUser.Group = dbGroup;
             dbGroup?.Users.Add(newUser);
 
-            foreach (var project in registerUserDto.Projects ?? Enumerable.Empty<string>())
+            foreach (var project in registerUserDto.Projects ?? Enumerable.Empty<CommonProjectDto>())
             {
-                var dbProject = await _projectRepository.FindByNameAsync(project);
+                var dbProject = await _projectRepository.GetAsync(project.ProjectId);
                 if (dbProject == null) continue;
                 var projectUser = await _projectUserFactory.CreateAsync(dbProject, newUser);
                 dbProject.ProjectUsers.Add(projectUser);

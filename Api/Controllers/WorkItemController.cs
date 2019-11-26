@@ -25,7 +25,7 @@ namespace Api.Controllers
         [Authorize(Policy = "Worker")]
         [HttpPost]
         [Route("CreateWorkItem")]
-        public async Task<IActionResult> CreateReport([Microsoft.AspNetCore.Mvc.FromBody]CreateWorkItem command)
+        public async Task<IActionResult> CreateReport([FromBody]CreateWorkItem command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();

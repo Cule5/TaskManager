@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Services.User.Dtos;
 
 namespace Services.Group.Dtos
 {
     public class CommonGroupDto
     {
-        public CommonGroupDto(string groupName,IEnumerable<CommonUserDto>users)
+        public CommonGroupDto(int groupId,string groupName)
         {
+            GroupId = groupId;
             GroupName = groupName;
-            Users = users;
         }
+        public int GroupId { get; }
         public string GroupName { get; }
-        public IEnumerable<CommonUserDto> Users { get; }
     }
 }

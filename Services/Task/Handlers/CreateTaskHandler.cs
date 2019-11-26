@@ -16,7 +16,7 @@ namespace Services.Task.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(CreateTask command)
         {
-            await _taskService.CreateTaskAsync(new CreateTaskDto(command.Description,command.TaskPriority,command.TaskType,command.StartDate,command.EndDate));
+            await _taskService.CreateTaskAsync(new CreateTaskDto(command.Description,command.TaskPriority,command.TaskType,command.StartDate,command.EndDate,command.ProjectId));
         }
     }
 }
