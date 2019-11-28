@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Domain.Common;
 using Core.Domain.Task.Repositories;
 using Core.Domain.WorkItem.Factories;
 using Core.Domain.WorkItem.Repositories;
@@ -26,6 +27,8 @@ namespace Services.WorkItem
         {
             var dbTask = await _taskRepository.GetAsync(createWorkItemDto.TaskId);
             if (dbTask == null)
+                throw new Exception("");
+            if(dbTask.TaskProgress==ETaskProgress.Finished)
                 throw new Exception("");
             dbTask.TaskProgress = createWorkItemDto.TaskProgress;
             var workItem = await _workItemFactory.CreateAsync(createWorkItemDto.Comment, createWorkItemDto.Time, createWorkItemDto.ReportDate, dbTask);

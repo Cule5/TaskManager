@@ -76,6 +76,14 @@ namespace Api.Controllers
             return Ok();
         }
 
+        [Authorize(Policy = "Worker")]
+        [HttpGet]
+        [Route("TaskProgress")]
+        public async Task<IActionResult> TaskProgress()
+        {
+            return Ok(await _queryDispatcher.DispatchAsync(new TaskProgress()));
+        }
+
 
     }
 }
