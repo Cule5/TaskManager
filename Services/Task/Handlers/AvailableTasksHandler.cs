@@ -20,7 +20,10 @@ namespace Services.Task.Handlers
         }
         public async Task<IEnumerable<AvailableTasksDto>> HandleAsync(AvailableTasks query)
         {
-            return await _dbContext.Tasks.Join(_dbContext.Projects, task => task.Project.ProjectId, project => project.ProjectId,
+            return await _dbContext.Tasks
+                .Join(_dbContext.ProjectUsers
+                        .Where(projectUser=>projectUser.UserId==query.UserId)
+                        .Select(projectUser=>projectUser.Project), task => task.Project.ProjectId, project => project.ProjectId,
                 (task, project) => new
                 {
                     TaskId = task.TaskId,
@@ -28,10 +31,10 @@ namespace Services.Task.Handlers
                     TaskPriority = task.TaskPriority,
                     EndDate = task.EndDate,
                     User=task.User,
-                    ProjectId=project.ProjectId
                 })
                 .Where(a=>a.User==null)
-                .Select(a => new AvailableTasksDto(a.TaskId, a.Description, a.TaskPriority, a.EndDate)).ToListAsync();
+                .Select(a => new AvailableTasksDto(a.TaskId, a.Description, a.TaskPriority, a.EndDate))
+                .ToListAsync();
 
 
 

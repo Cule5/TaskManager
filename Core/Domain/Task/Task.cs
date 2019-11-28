@@ -26,6 +26,7 @@ namespace Core.Domain.Task
         public string Description { get; set; }
         public ETaskPriority TaskPriority { get; set; }
         public ETaskType TaskType { get; set; }
+        public ETaskProgress TaskProgress { get; set; } = ETaskProgress.InProgress;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime RealStartDate { get; set; }

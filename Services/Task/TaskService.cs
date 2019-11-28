@@ -37,8 +37,12 @@ namespace Services.Task
 
         public async System.Threading.Tasks.Task SetTaskToUserAsync(int userId, int taskId)
         {
-            var user = await _userRepository.GetAsync(userId);
+
             var task = await _taskRepository.GetAsync(taskId);
+            if (task.User != null) 
+                throw new Exception("");
+            var user = await _userRepository.GetAsync(userId);
+            
             user.Tasks.Add(task);
             task.User = user;
             task.RealStartDate=DateTime.Now;

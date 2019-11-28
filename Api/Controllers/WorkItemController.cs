@@ -12,6 +12,7 @@ using Services.WorkItem.Command;
 
 namespace Api.Controllers
 {
+    [Route("api/[controller]")]
     public class WorkItemController : Controller
     {
         private readonly ICommandDispatcher _commandDispatcher = null;

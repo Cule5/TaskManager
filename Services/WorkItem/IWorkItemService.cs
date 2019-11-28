@@ -7,6 +7,6 @@ namespace Services.WorkItem
 {
     public interface IWorkItemService
     {
-        System.Threading.Tasks.Task CreateWorkItemAsync(CommonWorkItemDto commonWorkItemDto);
+        System.Threading.Tasks.Task CreateWorkItemAsync(CreateWorkItemDto createWorkItemDto);
     }
 }

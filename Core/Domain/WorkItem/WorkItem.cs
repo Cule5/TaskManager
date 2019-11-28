@@ -15,6 +15,7 @@ namespace Core.Domain.WorkItem
             Comment = comment;
             Time = time;
             ReportDate = reportDate;
+            Task = task;
         }
         public int WorkItemId { get; set; }
         public string Comment { get; set; }
