@@ -24,17 +24,15 @@ namespace Services.User.Handlers
         }
         public async Task<ExtendedUserDto> HandleAsync(UserInfo query)
         {
-            return null;
-            //var projects=await _dbContext.ProjectUsers.Where(projectUser => projectUser.UserId == query.UserId)
-            //    .Select(projectUser => new CreateProjectDto(projectUser.Project.ProjectName,projectUser.Project.Description,projectUser.Project.StartDate,null))
-            //    .ToListAsync();
-            //var user = _dbContext.Users.Find(query.UserId);
-            //if (user.Group != null)
-            //{
-            //    var commonGroupDto = new CommonGroupDto(user.Group.GroupId,user.Group.GroupName);
-            //}
+            var projects = await _dbContext.ProjectUsers.Where(projectUser => projectUser.UserId == query.UserId)
+                .Select(projectUser => new CommonProjectDto(projectUser.ProjectId,projectUser.Project.ProjectName))
+                .ToListAsync();
+            var user = _dbContext.Users.Find(query.UserId);
+            var commonGroupDto =
+                user.Group != null ? new CommonGroupDto(user.Group.GroupId, user.Group.GroupName) : null;
+            
 
-            //return new ExtendedUserDto(user.Name,user.LastName,user.Account.Email,new CommonGroupDto(user.Group.GroupId,user.Group?.GroupName), projects);
+            return new ExtendedUserDto(user.UserId,user.UserType,commonGroupDto, projects);
 
         }
     }

@@ -24,10 +24,15 @@ namespace Services.Conversation
         {
             var sender=await _userRepository.GetAsync(sendMessageDto.SenderId);
             var receiver =await _userRepository.GetAsync(sendMessageDto.ReceiverId);
-            var conversation = await _conversationFactory.CreateAsync(receiver, sender, sendMessageDto.Message);
+            var conversation = await _conversationFactory.CreateAsync(receiver, sender,sendMessageDto.Title ,sendMessageDto.Message);
             sender.SendedConversations.Add(conversation);
             receiver.ReceivedConversations.Add(conversation);
             await _conversationRepository.AddAsync(conversation);
+        }
+
+        public async System.Threading.Tasks.Task ChangeMessageStateAsync(int conversationId)
+        {
+            await _conversationRepository.GetAsync(conversationId);
         }
     }
 }

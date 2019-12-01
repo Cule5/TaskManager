@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Core.Domain.Conversation.Repositories;
 using Infrastructure.EntityFramework;
 
@@ -17,6 +18,11 @@ namespace Infrastructure.Repositories.Conversation
         {
             _dbContext.Conversations.Add(conversation);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<Core.Domain.Conversation.Conversation> GetAsync(int conversationId)
+        {
+            return await _dbContext.Conversations.FindAsync(conversationId);
         }
     }
 }

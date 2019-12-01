@@ -22,7 +22,7 @@ namespace Services.Conversation.Handlers
         {
             return await _dbContext.Conversations
                 .Where(conversation => conversation.Receiver.UserId == query.UserId)
-                .Select(conversation=>new UserMessagesDto())
+                .Select(conversation=>new UserMessagesDto(conversation.ConversationId,conversation.Sender.Account.Email,conversation.Title,conversation.MessageStatus))
                 .ToListAsync();
         }
     }

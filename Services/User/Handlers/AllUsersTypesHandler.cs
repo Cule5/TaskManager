@@ -8,13 +8,13 @@ using Services.User.Query;
 
 namespace Services.User.Handlers
 {
-    public class AllUsersTypesHandler:IQueryHandler<AllUsersTypes,IEnumerable<string>>
+    public class AllUsersTypesHandler:IQueryHandler<AllUsersTypes,IEnumerable<EUserType>>
     {
-        public Task<IEnumerable<string>> HandleAsync(AllUsersTypes query)
+        public Task<IEnumerable<EUserType>> HandleAsync(AllUsersTypes query)
         {
-            return System.Threading.Tasks.Task.Factory.StartNew<IEnumerable<string>>(() =>
+            return System.Threading.Tasks.Task.Factory.StartNew<IEnumerable<EUserType>>(() =>
             {
-                var usersType = new List<string>() { EUserType.ProjectManager.ToString(), EUserType.Worker.ToString() };
+                var usersType = new List<EUserType>() { EUserType.ProjectManager, EUserType.Worker};
                 return usersType;
             });
         }

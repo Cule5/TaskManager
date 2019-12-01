@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Domain.Project.Factories;
@@ -9,6 +11,7 @@ using Core.Domain.ProjectUser.Repositories;
 using Core.Domain.User.Repositories;
 using Infrastructure.UnitOfWork;
 using Services.Project.Dtos;
+using Services.User.Dtos;
 
 
 namespace Services.Project
@@ -34,7 +37,7 @@ namespace Services.Project
         public async System.Threading.Tasks.Task CreateProjectAsync(CreateProjectDto createProjectDto)
         {
             var newProject = await _projectFactory.CreateAsync(createProjectDto.ProjectName, createProjectDto.Description, createProjectDto.StartDate);
-            foreach (var user in createProjectDto.Users)
+            foreach (var user in createProjectDto.Users?? Enumerable.Empty<CommonUserDto>())
             {
                 var dbUser=await _userRepository.GetAsync(user.UserId);
                 if (dbUser == null) continue;

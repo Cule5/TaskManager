@@ -45,6 +45,13 @@ namespace Api.Controllers
             return Ok(await _queryDispatcher.DispatchAsync(new AllGroups()));
         }
 
+        [Authorize(Policy = "CompanyAdmin")]
+        [HttpPost]
+        [Route("DeleteGroup")]
+        public async Task<IActionResult> DeleteGroup()
+        {
+            return Ok();
+        }
 
        
     }

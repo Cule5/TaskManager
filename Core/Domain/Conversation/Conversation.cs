@@ -12,18 +12,22 @@ namespace Core.Domain.Conversation
         {
 
         }
-        public Conversation(string message,User.User receiver,User.User sender)
+        public Conversation(string title,string message,User.User receiver,User.User sender)
         {
+            Title = title;
             Message = message;
             Sender = sender;
             Receiver = receiver;
         }
         public int ConversationId { get; set; }
+        public string Title { get; set; }
         public string Message { get; set; }
         public int SenderId { get; set; }
         public virtual User.User Sender { get; set; }
         public int ReceiverId { get; set; }
         public virtual User.User Receiver { get; set; }
-        public EMessageStatus MessageStatus { get; set; }
+        public EMessageStatus MessageStatus { get; set; } = EMessageStatus.Unread;
+
+        
     }
 }

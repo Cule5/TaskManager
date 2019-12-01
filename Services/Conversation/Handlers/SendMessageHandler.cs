@@ -16,7 +16,7 @@ namespace Services.Conversation.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(SendMessage command)
         {
-            await _conversationService.SendMessageAsync(new SendMessageDto(command.SenderId,command.ReceiverId,command.Message));
+            await _conversationService.SendMessageAsync(new SendMessageDto(command.SenderId,command.ReceiverId,command.Title,command.Message));
         }
     }
 }

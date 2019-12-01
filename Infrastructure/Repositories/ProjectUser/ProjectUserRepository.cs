@@ -17,5 +17,14 @@ namespace Infrastructure.Repositories.ProjectUser
         {
             await _appDbContext.ProjectUsers.AddAsync(projectUser);
         }
+
+        public System.Threading.Tasks.Task DeleteAsync(Core.Domain.ProjectUser.ProjectUser projectUser)
+        {
+            return System.Threading.Tasks.Task.Factory.StartNew(() =>
+            {
+                _appDbContext.ProjectUsers.Remove(projectUser);
+            });
+           
+        }
     }
 }

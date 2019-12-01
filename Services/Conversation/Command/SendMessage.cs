@@ -11,13 +11,15 @@ namespace Services.Conversation.Command
         {
 
         }
-        public SendMessage(int receiverId,string message)
+        public SendMessage(int receiverId,string title,string message)
         {
             ReceiverId = receiverId;
+            Title = title;
             Message = message;
         }
         public int SenderId { get; set; }
         public int ReceiverId { get; set; }
+        public string Title { get; set; }
         public string Message { get; set; }
     }
 }

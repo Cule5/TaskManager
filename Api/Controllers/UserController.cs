@@ -71,11 +71,11 @@ namespace Api.Controllers
         }
 
         [Authorize(Policy = "CompanyAdmin")]
-        [HttpPost]
-        [Route("UserInfo")]
+        [HttpGet]
+        [Route("UserInfo/{userId}")]
         public async Task<IActionResult> UserInfo([FromRoute]int userId)
         {
-            return Ok(new UserInfo(userId));
+            return Ok(await _queryDispatcher.DispatchAsync(new UserInfo(userId)));
         }
 
         [Authorize(Policy = "CompanyAdmin")]
@@ -84,6 +84,15 @@ namespace Api.Controllers
         public async Task<IActionResult> UsersWithoutGroup()
         {
             return Ok(await _queryDispatcher.DispatchAsync(new UsersWithoutGroup()));
+        }
+
+        [Authorize(Policy = "CompanyAdmin")]
+        [HttpPost]
+        [Route("EditUser")]
+        public async Task<IActionResult> EditUser([FromBody]EditUser command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
         }
 
 

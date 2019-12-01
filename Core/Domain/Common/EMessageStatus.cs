@@ -6,7 +6,7 @@ namespace Core.Domain.Common
 {
     public enum EMessageStatus
     {
-        Sent,
-        Delivered
+        Read,
+        Unread
     }
 }

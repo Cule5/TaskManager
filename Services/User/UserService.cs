@@ -26,7 +26,7 @@ using Services.Project.Dtos;
 
 namespace Services.User
 {
-    public class UserService:IUserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository = null;
         private readonly IAccountRepository _accountRepository = null;
@@ -63,19 +63,19 @@ namespace Services.User
             _unitOfWork = unitOfWork;
             _emailSender = emailSender;
         }
-        public async System.Threading.Tasks.Task<JsonWebToken> Login(string login,string password)
+        public async System.Threading.Tasks.Task<JsonWebToken> Login(string login, string password)
         {
-            var dbAccount = await _accountRepository.FindAsync(login,password);
-            if(dbAccount==null)
+            var dbAccount = await _accountRepository.FindAsync(login, password);
+            if (dbAccount == null)
                 throw new LoginPasswordException("Bad login or password");
             var dbUser = dbAccount.User;
-            var token=_jwtProvider.CreateToken(dbUser.UserId, dbUser.UserType);
+            var token = _jwtProvider.CreateToken(dbUser.UserId, dbUser.UserType);
             return token;
         }
 
         public System.Threading.Tasks.Task LogoutAsync()
         {
-            
+
             throw new NotImplementedException();
         }
 
@@ -83,7 +83,7 @@ namespace Services.User
         {
             var newAccount = await _accountFactory.CreateAsync(registerUserDto.Email);
             var dbGroup = await _groupRepository.GetAsync(registerUserDto.GroupId);
-            var newUser=await _userFactory.CreateAsync(registerUserDto.Name,registerUserDto.LastName,registerUserDto.UserType);
+            var newUser = await _userFactory.CreateAsync(registerUserDto.Name, registerUserDto.LastName, registerUserDto.UserType);
             newUser.Account = newAccount;
             newUser.Group = dbGroup;
             dbGroup?.Users.Add(newUser);
@@ -100,8 +100,35 @@ namespace Services.User
             await _accountRepository.AddAsync(newAccount);
             await _userRepository.AddAsync(newUser);
             await _unitOfWork.SaveAsync();
-            _emailSender.Send(newAccount.Email,newAccount.Password);
+            _emailSender.Send(newAccount.Email, newAccount.Password);
         }
 
+        public async System.Threading.Tasks.Task EditUserAsync(ExtendedUserDto extendedUserDto)
+        {
+            var dbUser = await _userRepository.GetAsync(extendedUserDto.UserId);
+            var dbGroup = await _groupRepository.GetAsync(extendedUserDto.Group.GroupId);
+            var previousGroup = dbUser.Group;
+
+            dbUser.Group = dbGroup;
+            dbUser.UserType = extendedUserDto.UserType;
+            dbGroup.Users.Add(dbUser);
+            previousGroup.Users.Remove(dbUser);
+            foreach (var projectUser in dbUser.ProjectUsers)
+            {
+                await _projectUserRepository.DeleteAsync(projectUser);
+            }
+
+            foreach (var project in extendedUserDto.Projects ?? Enumerable.Empty<CommonProjectDto>())
+            {
+                var dbProject = await _projectRepository.GetAsync(project.ProjectId);
+                if (dbProject == null) continue;
+                var projectUser = await _projectUserFactory.CreateAsync(dbProject, dbUser);
+                dbProject.ProjectUsers.Add(projectUser);
+                dbUser.ProjectUsers.Add(projectUser);
+                await _projectUserRepository.AddAsync(projectUser);
+            }
+
+            await _unitOfWork.SaveAsync();
+        }
     }
 }

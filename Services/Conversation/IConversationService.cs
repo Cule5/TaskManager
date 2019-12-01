@@ -8,5 +8,6 @@ namespace Services.Conversation
     public interface IConversationService
     {
         System.Threading.Tasks.Task SendMessageAsync(SendMessageDto sendMessageDto);
+        System.Threading.Tasks.Task ChangeMessageStateAsync(int conversationId);
     }
 }

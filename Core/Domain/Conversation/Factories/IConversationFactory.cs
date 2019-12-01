@@ -7,6 +7,6 @@ namespace Core.Domain.Conversation.Factories
 {
     public interface IConversationFactory
     {
-        Task<Conversation> CreateAsync(User.User receiver,User.User sender,string message);
+        Task<Conversation> CreateAsync(User.User receiver,User.User sender,string title,string message);
     }
 }

@@ -42,5 +42,21 @@ namespace Api.Controllers
         {
             return Ok(await _queryDispatcher.DispatchAsync(new UserMessages(UserId)));
         }
+
+        [Authorize(Policy = "Common")]
+        [HttpGet]
+        [Route("GetMessage/{conversationId}")]
+        public async Task<IActionResult> GetMessage([FromRoute]int conversationId)
+        {
+            return Ok(await _queryDispatcher.DispatchAsync(new GetMessage(conversationId)));
+        }
+
+        [Authorize(Policy = "Common")]
+        [HttpPost]
+        [Route("ChangeMessageState")]
+        public async Task<IActionResult> ChangeMessageState(ChangeMessageState command)
+        {
+            return Ok(await _commandDispatcher.DispatchAsync(command));
+        }
     }
 }

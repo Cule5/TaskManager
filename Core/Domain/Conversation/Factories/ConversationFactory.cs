@@ -7,9 +7,9 @@ namespace Core.Domain.Conversation.Factories
 {
     public class ConversationFactory:IConversationFactory
     {
-        public Task<Conversation> CreateAsync(User.User receiver, User.User sender, string message)
+        public Task<Conversation> CreateAsync(User.User receiver, User.User sender,string title, string message)
         {
-            return System.Threading.Tasks.Task.Factory.StartNew(() => new Conversation(message,receiver,sender));
+            return System.Threading.Tasks.Task.Factory.StartNew(() => new Conversation(title,message,receiver,sender));
         }
     }
 }

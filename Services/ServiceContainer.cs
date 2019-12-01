@@ -18,7 +18,6 @@ namespace Services
             containerBuilder.RegisterAssemblyTypes(coreAssembly)
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
-
         }
     }
 }
