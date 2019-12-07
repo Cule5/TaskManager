@@ -4,6 +4,7 @@ using System.Text;
 using Core.Domain.Conversation.Factories;
 using Core.Domain.Conversation.Repositories;
 using Core.Domain.User.Repositories;
+using Infrastructure.UnitOfWork;
 using Services.Conversation.Dtos;
 
 namespace Services.Conversation
@@ -13,10 +14,12 @@ namespace Services.Conversation
         private readonly IConversationRepository _conversationRepository = null;
         private readonly IUserRepository _userRepository = null;
         private readonly IConversationFactory _conversationFactory = null;
-        public ConversationService(IConversationRepository conversationRepository,IUserRepository userRepository,IConversationFactory conversationFactory)
+        private readonly IUnitOfWork _unitOfWork = null;
+        public ConversationService(IConversationRepository conversationRepository,IUserRepository userRepository,IUnitOfWork unitOfWork,IConversationFactory conversationFactory)
         {
             _conversationRepository = conversationRepository;
             _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
             _conversationFactory = conversationFactory;
         }
 
@@ -28,11 +31,14 @@ namespace Services.Conversation
             sender.SendedConversations.Add(conversation);
             receiver.ReceivedConversations.Add(conversation);
             await _conversationRepository.AddAsync(conversation);
+            await _unitOfWork.SaveAsync();
         }
 
         public async System.Threading.Tasks.Task ChangeMessageStateAsync(int conversationId)
         {
-            await _conversationRepository.GetAsync(conversationId);
+            var dbConversation = await _conversationRepository.GetAsync(conversationId);
+            dbConversation.ChangeStatus();
+            await _unitOfWork.SaveAsync();
         }
     }
 }

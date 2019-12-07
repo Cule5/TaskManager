@@ -6,6 +6,7 @@ using Core.Domain.Conversation;
 using Core.Domain.Group;
 using Core.Domain.Project;
 using Core.Domain.ProjectUser;
+using Core.Domain.RefreshToken;
 using Core.Domain.WorkItem;
 using Core.Domain.Task;
 using Core.Domain.User;
@@ -23,6 +24,7 @@ namespace Infrastructure.EntityFramework
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WorkItem> WorkItems { get; set; }
+        //public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -81,16 +83,6 @@ namespace Infrastructure.EntityFramework
                 .WithMany(u=>u.ProjectUsers)
                 .HasForeignKey(pu=>pu.UserId);
 
-            //modelBuilder.Entity<Conversation>()
-            //    .HasOne(c => c.Receiver)
-            //    .WithMany(u => u.Conversations)
-            //    .HasForeignKey(c => c.ReceiverId)
-            //    .OnDelete(DeleteBehavior.SetNull);
-            //modelBuilder.Entity<Conversation>()
-            //    .HasOne(c => c.Sender)
-            //    .WithMany(u => u.Conversations)
-            //    .HasForeignKey(c => c.SenderId)
-            //    .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<User>().HasMany(u => u.ReceivedConversations)
                 .WithOne(c => c.Receiver)
@@ -100,10 +92,6 @@ namespace Infrastructure.EntityFramework
                 .WithOne(c=>c.Sender)
                 .HasForeignKey(c=>c.SenderId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-
-
-
         }
     }
 }

@@ -17,7 +17,6 @@ namespace Infrastructure.Repositories.Conversation
         public async System.Threading.Tasks.Task AddAsync(Core.Domain.Conversation.Conversation conversation)
         {
             _dbContext.Conversations.Add(conversation);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Core.Domain.Conversation.Conversation> GetAsync(int conversationId)

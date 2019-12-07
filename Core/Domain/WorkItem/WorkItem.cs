@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Core.Domain.WorkItem
@@ -18,9 +19,11 @@ namespace Core.Domain.WorkItem
             Task = task;
         }
         public int WorkItemId { get; set; }
+        [Required]
         public string Comment { get; set; }
         public double Time { get; set; }
         public DateTime ReportDate { get; set; }
+        [Required]
         public virtual Task.Task Task { get; set; }
        
     }

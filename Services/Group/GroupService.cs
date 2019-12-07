@@ -41,12 +41,5 @@ namespace Services.Group
             await _groupRepository.AddAsync(newGroup);
             await _unitOfWork.SaveAsync();
         }
-
-        public async System.Threading.Tasks.Task DeleteGroup(string groupName)
-        {
-            
-        }
-
-        
     }
 }

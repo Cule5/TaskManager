@@ -14,9 +14,9 @@ namespace Services.Conversation.Handlers
         {
             _conversationService = conversationService;
         }
-        public System.Threading.Tasks.Task HandleAsync(ChangeMessageState command)
+        public async System.Threading.Tasks.Task HandleAsync(ChangeMessageState command)
         {
-            throw new NotImplementedException();
+            await _conversationService.ChangeMessageStateAsync(command.ConversationId);
         }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Dispatcher.Command;
 using Services.Dispatcher.Query;
+using Services.RefreshToken.Command;
 using Services.User;
 using Services.User.Command;
 using Services.User.Query;
@@ -47,13 +48,6 @@ namespace Api.Controllers
             return Ok(await _queryDispatcher.DispatchAsync(query));
         }
         
-        [HttpPut]
-        [Route("Logout")]
-        public async Task<IActionResult> LogoutAsync()
-        {
-            return Ok();
-        }
-
 
         [Authorize(Policy = "CompanyAdmin")]
         [HttpGet]
@@ -90,6 +84,15 @@ namespace Api.Controllers
         [HttpPost]
         [Route("EditUser")]
         public async Task<IActionResult> EditUser([FromBody]EditUser command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
+        }
+
+        [Authorize(Policy = "Common")]
+        [HttpPost]
+        [Route("RefreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody]RefreshToken command)
         {
             await _commandDispatcher.DispatchAsync(command);
             return Ok();

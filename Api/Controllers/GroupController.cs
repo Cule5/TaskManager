@@ -37,7 +37,7 @@ namespace Api.Controllers
             return Ok();
         }
 
-        [Authorize(Policy = "CompanyAdmin")]
+        [Authorize(Policy = "Common")]
         [HttpGet]
         [Route("AllGroups")]
         public async Task<IActionResult> AllGroups()

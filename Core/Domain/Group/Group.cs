@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Core.Domain.Group
@@ -15,6 +16,7 @@ namespace Core.Domain.Group
             GroupName = groupName;
         }
         public int GroupId { get; set; }
+        [Required]
         public string GroupName { get; set; }
         public virtual ICollection<User.User> Users { get; set; }=new List<User.User>();
         

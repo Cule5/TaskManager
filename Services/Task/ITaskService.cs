@@ -9,6 +9,5 @@ namespace Services.Task
     {
         System.Threading.Tasks.Task CreateTaskAsync(CreateTaskDto createTaskDto);
         System.Threading.Tasks.Task SetTaskToUserAsync(int userId,int taskId);
-        System.Threading.Tasks.Task DeleteTaskAsync();
     }
 }

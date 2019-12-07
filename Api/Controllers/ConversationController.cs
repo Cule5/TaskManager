@@ -54,9 +54,10 @@ namespace Api.Controllers
         [Authorize(Policy = "Common")]
         [HttpPost]
         [Route("ChangeMessageState")]
-        public async Task<IActionResult> ChangeMessageState(ChangeMessageState command)
+        public async Task<IActionResult> ChangeMessageState([FromBody]ChangeMessageState command)
         {
-            return Ok(await _commandDispatcher.DispatchAsync(command));
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Core.Domain.Project
@@ -18,7 +19,9 @@ namespace Core.Domain.Project
             StartDate = startDate;
         }
         public int ProjectId { get; set; }
+        [Required]
         public string ProjectName { get; set; }
+        [Required]
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public virtual ICollection<Task.Task> Tasks { get; set; }=new List<Task.Task>();

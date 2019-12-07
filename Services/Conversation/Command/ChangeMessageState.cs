@@ -7,6 +7,6 @@ namespace Services.Conversation.Command
 {
     public class ChangeMessageState:ICommand
     {
-        public int ConversationId { get; set;t }
+        public int ConversationId { get; set; }
     }
 }

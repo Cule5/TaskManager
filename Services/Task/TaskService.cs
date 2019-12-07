@@ -37,7 +37,6 @@ namespace Services.Task
 
         public async System.Threading.Tasks.Task SetTaskToUserAsync(int userId, int taskId)
         {
-
             var task = await _taskRepository.GetAsync(taskId);
             if (task.User != null) 
                 throw new Exception("");
@@ -47,11 +46,6 @@ namespace Services.Task
             task.User = user;
             task.RealStartDate=DateTime.Now;
             await _unitOfWork.SaveAsync();
-        }
-
-        public System.Threading.Tasks.Task DeleteTaskAsync()
-        {
-            throw new NotImplementedException();
         }
     }
 }

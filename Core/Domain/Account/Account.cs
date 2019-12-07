@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Core.Domain.Account
@@ -17,9 +18,11 @@ namespace Core.Domain.Account
             Password = password;
         }
         public int AccountId { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Password { get; set; }
-        
+        [Required]
         public virtual User.User User { get; set; }
 
         
