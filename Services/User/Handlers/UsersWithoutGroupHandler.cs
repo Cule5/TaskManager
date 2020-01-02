@@ -21,7 +21,8 @@ namespace Services.User.Handlers
         }
         public async Task<IEnumerable<CommonUserDto>> HandleAsync(UsersWithoutGroup query)
         {
-            return await _dbContext.Users.Where(user => user.Group == null&&user.UserType!=EUserType.CompanyAdmin).Select(user=>new CommonUserDto(user.UserId,user.Name,user.LastName,user.Account.Email)).ToListAsync();
+            var u=await _dbContext.Users.Where(user => user.Group == null && user.Account.UserType != EUserType.CompanyAdmin).Select(user => new CommonUserDto(user.UserId, user.Name, user.LastName, user.Account.Email)).ToListAsync();
+            return await _dbContext.Users.Where(user => user.Group == null&&user.Account.UserType!=EUserType.CompanyAdmin).Select(user=>new CommonUserDto(user.UserId,user.Name,user.LastName,user.Account.Email)).ToListAsync();
         }
     }
 }

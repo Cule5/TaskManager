@@ -19,18 +19,12 @@ namespace Core.Domain.User
             Name = name;
             LastName = lastName;
         }
-        public User(string name,string lastName,EUserType userType)
-        {
-            Name = name;
-            LastName = lastName;
-            UserType = userType;
-        }
+        
         public int UserId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public string LastName { get; set; }
-        public EUserType UserType { get; set; }
         public virtual Group.Group Group { get; set; }
         public int AccountId { get; set; }
         [Required]

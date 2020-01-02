@@ -21,7 +21,7 @@ namespace Services.User.Handlers
         }
         public async Task<IEnumerable<CommonUserDto>> HandleAsync(ProjectsManagers query)
         {
-            return await _dbContext.Users.Where(user => user.UserType == EUserType.CompanyAdmin).Select(user =>
+            return await _dbContext.Users.Where(user => user.Account.UserType == EUserType.CompanyAdmin).Select(user =>
                 new CommonUserDto(user.UserId, user.Name, user.LastName, user.Account.Email)).ToListAsync();
         }
     }

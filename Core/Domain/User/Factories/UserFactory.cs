@@ -21,9 +21,9 @@ namespace Core.Domain.User.Factories
 
         
 
-        public Task<User> CreateAsync(string name, string lastName, EUserType userType)
+        public Task<User> CreateAsync(string name, string lastName)
         {
-            return System.Threading.Tasks.Task.Factory.StartNew(() => new User(name, lastName, userType));
+            return System.Threading.Tasks.Task.Factory.StartNew(() => new User(name, lastName));
         }
     }
 }

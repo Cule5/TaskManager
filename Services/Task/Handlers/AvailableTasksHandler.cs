@@ -35,9 +35,6 @@ namespace Services.Task.Handlers
                 .Where(a=>a.User==null)
                 .Select(a => new AvailableTasksDto(a.TaskId, a.Description, a.TaskPriority, a.EndDate))
                 .ToListAsync();
-
-
-
         }
     }
 }

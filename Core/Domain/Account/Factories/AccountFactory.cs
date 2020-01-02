@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Domain.Account.Repositories;
 using Core.Domain.Account.Services.PasswordGenerator;
+using Core.Domain.Common;
 using Core.Domain.Exceptions;
 
 namespace Core.Domain.Account.Factories
@@ -17,13 +18,13 @@ namespace Core.Domain.Account.Factories
             _accountRepository = accountRepository;
             _passwordGenerator = passwordGenerator;
         }
-        public async Task<Account> CreateAsync(string email)
+        public async Task<Account> CreateAsync(string email,EUserType userType)
         {
             var dbAccount=await _accountRepository.FindByEmailAsync(email);
             if(dbAccount!=null)
                 throw new EmailException("Account with given email already exists");
             var password = _passwordGenerator.Generate(8);
-            return new Account(email,password);
+            return new Account(email,password,userType);
         }
     }
 }

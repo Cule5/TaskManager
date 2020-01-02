@@ -28,7 +28,9 @@ namespace Infrastructure.EntityFramework
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Server=localhost;Database=TaskManagerDataBase;Trusted_Connection=True;");
+            optionsBuilder
+                .UseLazyLoadingProxies()
+                .UseSqlServer(@"Server=localhost;Database=TaskManagerDataBase;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -69,7 +69,7 @@ namespace Services.User
             if (dbAccount == null)
                 throw new LoginPasswordException("Bad login or password");
             var dbUser = dbAccount.User;
-            var token = _jwtProvider.CreateToken(dbUser.UserId, dbUser.UserType);
+            var token = _jwtProvider.CreateToken(dbUser.UserId, dbUser.Account.UserType);
             return token;
         }
 
@@ -81,9 +81,11 @@ namespace Services.User
 
         public async System.Threading.Tasks.Task RegisterAsync(RegisterUserDto registerUserDto)
         {
-            var newAccount = await _accountFactory.CreateAsync(registerUserDto.Email);
-            var dbGroup = await _groupRepository.GetAsync(registerUserDto.GroupId);
-            var newUser = await _userFactory.CreateAsync(registerUserDto.Name, registerUserDto.LastName, registerUserDto.UserType);
+            var newAccount = await _accountFactory.CreateAsync(registerUserDto.Email,registerUserDto.UserType);
+            Core.Domain.Group.Group dbGroup = null;
+            if(registerUserDto.GroupId!=null)
+                dbGroup = await _groupRepository.GetAsync(registerUserDto.GroupId.Value);
+            var newUser = await _userFactory.CreateAsync(registerUserDto.Name, registerUserDto.LastName);
             newUser.Account = newAccount;
             newUser.Group = dbGroup;
             dbGroup?.Users.Add(newUser);
@@ -110,7 +112,7 @@ namespace Services.User
             var previousGroup = dbUser.Group;
 
             dbUser.Group = dbGroup;
-            dbUser.UserType = extendedUserDto.UserType;
+            dbUser.Account.UserType = extendedUserDto.UserType;
             dbGroup.Users.Add(dbUser);
             previousGroup.Users.Remove(dbUser);
             foreach (var projectUser in dbUser.ProjectUsers)

@@ -32,7 +32,7 @@ namespace Services.User.Handlers
                 user.Group != null ? new CommonGroupDto(user.Group.GroupId, user.Group.GroupName) : null;
             
 
-            return new ExtendedUserDto(user.UserId,user.UserType,commonGroupDto, projects);
+            return new ExtendedUserDto(user.UserId,user.Account.UserType,commonGroupDto, projects);
 
         }
     }
