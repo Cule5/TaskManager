@@ -37,15 +37,15 @@ namespace Services.Project
         public async System.Threading.Tasks.Task CreateProjectAsync(CreateProjectDto createProjectDto)
         {
             var newProject = await _projectFactory.CreateAsync(createProjectDto.ProjectName, createProjectDto.Description, createProjectDto.StartDate);
-            foreach (var user in createProjectDto.Users?? Enumerable.Empty<CommonUserDto>())
-            {
-                var dbUser=await _userRepository.GetAsync(user.UserId);
-                if (dbUser == null) continue;
-                var newProjectUser = await _projectUserFactory.CreateAsync(newProject, dbUser);
-                dbUser.ProjectUsers.Add(newProjectUser);
-                newProject.ProjectUsers.Add(newProjectUser);
-                await _projectUserRepository.AddAsync(newProjectUser);
-            }
+            //foreach (var user in createProjectDto.Users?? Enumerable.Empty<CommonUserDto>())
+            //{
+            //    var dbUser=await _userRepository.GetAsync(user.UserId);
+            //    if (dbUser == null) continue;
+            //    var newProjectUser = await _projectUserFactory.CreateAsync(newProject, dbUser);
+            //    dbUser.ProjectUsers.Add(newProjectUser);
+            //    newProject.ProjectUsers.Add(newProjectUser);
+            //    await _projectUserRepository.AddAsync(newProjectUser);
+            //}
             
             await _projectRepository.AddAsync(newProject);
             await _unitOfWork.SaveAsync();

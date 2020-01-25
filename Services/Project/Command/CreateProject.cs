@@ -11,7 +11,6 @@ namespace Services.Project.Command
         public string ProjectName { get; set; }
         public string ProjectDescription { get; set; }
         public DateTime StartDate { get; set; }
-        public IEnumerable<CommonUserDto> Users { get; set; }
         
     }
 }

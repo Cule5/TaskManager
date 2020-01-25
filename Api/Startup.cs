@@ -109,7 +109,7 @@ public class Startup
             }
 
             app.UseAuthentication();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

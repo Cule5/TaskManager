@@ -16,7 +16,7 @@ namespace Services.Project.Handlers
         }
         public async System.Threading.Tasks.Task HandleAsync(CreateProject command)
         {
-            var createProjectDto = new CreateProjectDto(command.ProjectName,command.ProjectDescription,command.StartDate,command.Users);
+            var createProjectDto = new CreateProjectDto(command.ProjectName,command.ProjectDescription,command.StartDate);
             await _projectService.CreateProjectAsync(createProjectDto);
         }
     }
